@@ -9,7 +9,12 @@ class ServicesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
       body: Center(
-        child: Text('Services')
+        child: Text(
+          'Services Page',
+          style: TextStyle(
+            fontSize: 40
+          ),
+        )
       )
     );
   }

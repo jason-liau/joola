@@ -9,7 +9,12 @@ class TrainPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
       body: Center(
-        child: Text('Train')
+        child: Text(
+          'Train Page',
+          style: TextStyle(
+            fontSize: 40
+          ),
+        )
       )
     );
   }
