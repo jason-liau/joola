@@ -8,7 +8,9 @@ class ServicesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: Text('Services')
+      body: Center(
+        child: Text('Services')
+      )
     );
   }
 }

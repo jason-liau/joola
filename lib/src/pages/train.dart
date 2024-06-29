@@ -8,7 +8,9 @@ class TrainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: Text('Train')
+      body: Center(
+        child: Text('Train')
+      )
     );
   }
 }
