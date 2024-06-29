@@ -109,7 +109,7 @@ class _LoginPageState extends State<LoginPage> {
             
                 // Forgot password
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 25),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
@@ -133,7 +133,7 @@ class _LoginPageState extends State<LoginPage> {
             
                 // Continue with
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 25),
                   child: Row(
                     children: [
                       Expanded(
@@ -143,7 +143,7 @@ class _LoginPageState extends State<LoginPage> {
                         )
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
                         child: Text(
                           'Or continue with',
                           style: TextStyle(color: Colors.grey[700])
