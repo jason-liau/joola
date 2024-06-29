@@ -33,7 +33,7 @@ class _HomePageState extends State<HomePage> {
             gap: 8,
             onTabChange: (index) {
             },
-            tabs: const [
+            tabs: const [ 
               GButton(
                 icon: Icons.home_outlined,
                 text: 'Home'
