@@ -5,8 +5,8 @@ import 'package:joola/src/pages/auth.dart';
 import 'settings/settings_controller.dart';
 
 /// The Widget that configures your application.
-class MyApp extends StatelessWidget {
-  const MyApp({
+class Application extends StatelessWidget {
+  const Application({
     super.key,
     required this.settingsController,
   });

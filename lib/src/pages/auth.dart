@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:joola/src/pages/home.dart';
+import 'package:joola/src/pages/navigation.dart';
 import 'package:joola/src/pages/login_register.dart';
 
 class AuthPage extends StatelessWidget {
@@ -14,7 +14,7 @@ class AuthPage extends StatelessWidget {
         builder: (context, snapshot) {
           // User is logged in
           if (snapshot.hasData) {
-            return HomePage();
+            return const NavigationPage();
           } else {
             return const LoginRegisterPage();
           }
