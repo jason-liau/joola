@@ -10,6 +10,7 @@ class HorizontalScroll extends StatelessWidget {
     return SizedBox(
       height: 180,
       child: ListView(
+        physics: const BouncingScrollPhysics(),
         scrollDirection: Axis.horizontal,
         children: [
           Padding(

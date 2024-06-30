@@ -71,7 +71,7 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[300],
+      backgroundColor: Colors.grey.shade300,
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
@@ -92,7 +92,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 Text(
                   'Register here!',
                   style: TextStyle(
-                    color: Colors.grey[700],
+                    color: Colors.grey.shade700,
                     fontSize: 16
                   )
                 ),
@@ -142,20 +142,20 @@ class _RegisterPageState extends State<RegisterPage> {
                       Expanded(
                         child: Divider(
                           thickness: 0.5,
-                          color: Colors.grey[400]
+                          color: Colors.grey.shade400
                         )
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 10.0),
                         child: Text(
                           'Or continue with',
-                          style: TextStyle(color: Colors.grey[700])
+                          style: TextStyle(color: Colors.grey.shade700)
                         )
                       ),
                       Expanded(
                         child: Divider(
                           thickness: 0.5,
-                          color: Colors.grey[400]
+                          color: Colors.grey.shade400
                         )
                       )
                     ]
@@ -182,7 +182,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   children: [
                     Text(
                       'Already have an account?',
-                      style: TextStyle(color: Colors.grey[700])
+                      style: TextStyle(color: Colors.grey.shade700)
                     ),
                     const SizedBox(width: 4),
                     GestureDetector(

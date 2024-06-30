@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:joola/src/components/home_header.dart';
 import 'package:joola/src/components/horizontal_scroll.dart';
+import 'package:joola/src/components/log_activity.dart';
+import 'package:joola/src/components/start_activity.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({
@@ -23,21 +25,62 @@ class HomePage extends StatelessWidget {
                   end: Alignment.bottomCenter,
                   colors: [
                     Color.fromARGB(255, 64, 64, 162),
-                    Color.fromARGB(255, 111, 98, 192),
+                    Color.fromARGB(255, 121, 106, 199),
                   ],
                   tileMode: TileMode.clamp,
                 ),
               ),
-              child: const Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 20,
-                  vertical: 50
+            )
+          ),
+          Positioned(
+            top: -50,
+            left: -200,
+            child: Container(
+              width: 500,
+              height: 500,
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Color.fromARGB(255, 80, 78, 171),
+                    Color.fromARGB(255, 107, 97, 189),
+                    Color.fromARGB(255, 138, 120, 208),
+                  ],
+                  tileMode: TileMode.clamp,
                 ),
-                child: Text(
-                    'Welcome!',
-                    style: TextStyle(fontSize: 24, color: Colors.white),
-                ),
+                shape: BoxShape.circle
               )
+            ),
+          ),
+          Positioned(
+            top: -20,
+            left: -230,
+            child: Container(
+              width: 500,
+              height: 500,
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Color.fromARGB(255, 97, 93, 180),
+                    Color.fromARGB(255, 162, 141, 222),
+                  ],
+                  tileMode: TileMode.clamp,
+                ),
+                shape: BoxShape.circle
+              )
+            ),
+          ),
+          const Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: 30,
+              vertical: 60
+            ),
+            child: Text(
+                'Welcome, Jane!',
+                style: TextStyle(fontSize: 24, color: Colors.white),
             ),
           ),
           DraggableScrollableSheet(
@@ -48,19 +91,31 @@ class HomePage extends StatelessWidget {
             builder: (BuildContext context, ScrollController scrollController) {
               return Container(
                 decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(25),
-                    topRight: Radius.circular(25)
+                  borderRadius: BorderRadius.vertical(
+                    top: Radius.circular(25),
                   ),
                   color: Colors.white
                 ),
                 child: ListView(
+                  physics: const ScrollPhysics(
+                    parent: BouncingScrollPhysics()
+                  ),
                   controller: scrollController,
                   children: const [
                     HomeHeader(
                       text: 'In Progress'
                     ),
                     HorizontalScroll(),
+                    Padding(
+                      padding: EdgeInsets.only(top: 30),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          StartActivity(),
+                          LogActivity()
+                        ]
+                      ),
+                    ),
                     HomeHeader(
                       text: 'Recommended for You'
                     ),

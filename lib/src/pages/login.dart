@@ -61,7 +61,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[300],
+      backgroundColor: Colors.grey.shade300,
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
@@ -82,7 +82,7 @@ class _LoginPageState extends State<LoginPage> {
                 Text(
                   'Welcome back!',
                   style: TextStyle(
-                    color: Colors.grey[700],
+                    color: Colors.grey.shade700,
                     fontSize: 16
                   )
                 ),
@@ -115,7 +115,7 @@ class _LoginPageState extends State<LoginPage> {
                     children: [
                       Text(
                         'Forgot password?',
-                        style: TextStyle(color: Colors.grey[600])
+                        style: TextStyle(color: Colors.grey.shade600)
                       )
                     ]
                   )
@@ -139,20 +139,20 @@ class _LoginPageState extends State<LoginPage> {
                       Expanded(
                         child: Divider(
                           thickness: 0.5,
-                          color: Colors.grey[400]
+                          color: Colors.grey.shade400
                         )
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 10),
                         child: Text(
                           'Or continue with',
-                          style: TextStyle(color: Colors.grey[700])
+                          style: TextStyle(color: Colors.grey.shade700)
                         )
                       ),
                       Expanded(
                         child: Divider(
                           thickness: 0.5,
-                          color: Colors.grey[400]
+                          color: Colors.grey.shade400
                         )
                       )
                     ]
@@ -179,7 +179,7 @@ class _LoginPageState extends State<LoginPage> {
                   children: [
                     Text(
                       'Not a member?',
-                      style: TextStyle(color: Colors.grey[700])
+                      style: TextStyle(color: Colors.grey.shade700)
                     ),
                     const SizedBox(width: 4),
                     GestureDetector(
