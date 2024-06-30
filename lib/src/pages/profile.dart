@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -5,10 +6,22 @@ class ProfilePage extends StatelessWidget {
     super.key,
   });
 
+  void signOut() {
+    FirebaseAuth.instance.signOut();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
+    return Scaffold(
+      appBar: AppBar(
+        actions: [
+          IconButton(
+            onPressed: signOut,
+            icon: const Icon(Icons.settings)
+          )
+        ]
+      ),
+      body: const Center(
         child: Text(
           'Profile Page',
           style: TextStyle(

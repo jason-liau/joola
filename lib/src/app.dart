@@ -4,6 +4,23 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:joola/src/pages/auth.dart';
 import 'settings/settings_controller.dart';
 
+class ScrollBehaviorModified extends ScrollBehavior {
+  const ScrollBehaviorModified();
+  @override
+  ScrollPhysics getScrollPhysics(BuildContext context) {
+    switch (getPlatform(context)) {
+      case TargetPlatform.iOS:
+      case TargetPlatform.macOS:
+      case TargetPlatform.android:
+        return const BouncingScrollPhysics();
+      case TargetPlatform.fuchsia:
+      case TargetPlatform.linux:
+      case TargetPlatform.windows:
+        return const ClampingScrollPhysics();
+    }
+  }
+}
+
 /// The Widget that configures your application.
 class Application extends StatelessWidget {
   const Application({
@@ -63,18 +80,13 @@ class Application extends StatelessWidget {
             return MaterialPageRoute<void>(
               settings: routeSettings,
               builder: (BuildContext context) {
-                // switch (routeSettings.name) {
-                //   case SettingsView.routeName:
-                //     return SettingsView(controller: settingsController);
-                //   case SampleItemDetailsView.routeName:
-                //     return const SampleItemDetailsView();
-                //   case SampleItemListView.routeName:
-                //   default:
-                //     return const SampleItemListView();
-                // }
                 return const AuthPage();
               },
             );
+          },
+          builder: (context, widget) {
+            return ScrollConfiguration(
+                behavior: const ScrollBehaviorModified(), child: widget!);
           },
         );
       },

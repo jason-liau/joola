@@ -32,7 +32,6 @@ class _NavigationPage extends State<NavigationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(actions: [IconButton(onPressed: signOut, icon: const Icon(Icons.settings_outlined))]),
       body: pages[pageIndex],
       bottomNavigationBar: Container(
         color: Colors.black,
