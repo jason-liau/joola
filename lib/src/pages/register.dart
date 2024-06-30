@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:joola/src/components/login_button.dart';
@@ -16,6 +17,7 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  final nameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
@@ -37,6 +39,9 @@ class _RegisterPageState extends State<RegisterPage> {
           email: emailController.text,
           password: passwordController.text
         );
+
+        User user = FirebaseAuth.instance.currentUser!;
+        await user.updateProfile(displayName: nameController.text);
 
         if (mounted) {
           Navigator.of(context).pop();
@@ -81,16 +86,16 @@ class _RegisterPageState extends State<RegisterPage> {
                 const SizedBox(height: 50),
             
                 // Logo
-                const Icon(
-                  Icons.lock,
-                  size: 100
+                Image.asset(
+                  'assets/images/joola.png',
+                  height: 100
                 ),
-            
+
                 const SizedBox(height: 50),
             
-                // Welcome
+                // Register
                 Text(
-                  'Register here!',
+                  'Sign Up',
                   style: TextStyle(
                     color: Colors.grey.shade700,
                     fontSize: 16
@@ -98,6 +103,15 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
             
                 const SizedBox(height: 25),
+
+                // Name
+                LoginText(
+                  controller: nameController,
+                  hintText: "Name",
+                  obscureText: false
+                ),
+
+                const SizedBox(height: 10),
             
                 // Email
                 LoginText(
@@ -168,9 +182,9 @@ class _RegisterPageState extends State<RegisterPage> {
                 const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SquareTile(imagePath: 'assets/images/google.png'),
+                    SquareTile(imagePath: 'assets/images/google.png', height: 40),
                     SizedBox(width: 25),
-                    SquareTile(imagePath: 'assets/images/apple.png')
+                    SquareTile(imagePath: 'assets/images/apple.png', height: 40)
                   ]
                 ),
             

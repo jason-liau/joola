@@ -71,16 +71,16 @@ class _LoginPageState extends State<LoginPage> {
                 const SizedBox(height: 50),
             
                 // Logo
-                const Icon(
-                  Icons.lock,
-                  size: 100
+                Image.asset(
+                  'assets/images/joola.png',
+                  height: 100
                 ),
             
                 const SizedBox(height: 50),
             
-                // Welcome
+                // Log in
                 Text(
-                  'Welcome back!',
+                  'Log In',
                   style: TextStyle(
                     color: Colors.grey.shade700,
                     fontSize: 16
@@ -165,9 +165,9 @@ class _LoginPageState extends State<LoginPage> {
                 const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SquareTile(imagePath: 'assets/images/google.png'),
+                    SquareTile(imagePath: 'assets/images/google.png', height: 40),
                     SizedBox(width: 25),
-                    SquareTile(imagePath: 'assets/images/apple.png')
+                    SquareTile(imagePath: 'assets/images/apple.png', height: 40)
                   ]
                 ),
             

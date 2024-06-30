@@ -19,13 +19,14 @@ class ActivityButton extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        height: 120,
-        width: 120,
+        height: 110,
+        width: 110,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(20),
           boxShadow: const [
             BoxShadow(
+              color: Colors.grey,
               blurRadius: 5,
               offset: Offset(2, 2),
             )
@@ -43,8 +44,7 @@ class ActivityButton extends StatelessWidget {
               text,
               style: const TextStyle(
                 color: Colors.black,
-                fontSize: 20,
-                fontWeight: FontWeight.bold
+                fontSize: 18,
               )
             ),
           ]

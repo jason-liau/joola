@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:joola/src/components/home_header.dart';
 import 'package:joola/src/components/horizontal_scroll.dart';
@@ -5,9 +6,11 @@ import 'package:joola/src/components/log_activity.dart';
 import 'package:joola/src/components/start_activity.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({
+  HomePage({
     super.key,
   });
+
+  final String? name = FirebaseAuth.instance.currentUser!.displayName;
 
   @override
   Widget build(BuildContext context) {
@@ -73,14 +76,14 @@ class HomePage extends StatelessWidget {
               )
             ),
           ),
-          const Padding(
-            padding: EdgeInsets.symmetric(
+          Padding(
+            padding: const EdgeInsets.symmetric(
               horizontal: 30,
               vertical: 60
             ),
             child: Text(
-                'Welcome, Jane!',
-                style: TextStyle(fontSize: 24, color: Colors.white),
+                name == null || name!.isEmpty ? 'Welcome!' : 'Welcome, ${name!}!',
+                style: const TextStyle(fontSize: 24, color: Colors.white),
             ),
           ),
           DraggableScrollableSheet(
@@ -96,44 +99,46 @@ class HomePage extends StatelessWidget {
                   ),
                   color: Colors.white
                 ),
-                child: ListView(
+                child: SingleChildScrollView(
                   physics: const ScrollPhysics(
                     parent: BouncingScrollPhysics()
                   ),
                   controller: scrollController,
-                  children: const [
-                    HomeHeader(
-                      text: 'In Progress'
-                    ),
-                    HorizontalScroll(),
-                    Padding(
-                      padding: EdgeInsets.only(top: 30),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          StartActivity(),
-                          LogActivity()
-                        ]
+                  child: const Column(
+                    children: [
+                      HomeHeader(
+                        text: 'In Progress'
                       ),
-                    ),
-                    HomeHeader(
-                      text: 'Recommended for You'
-                    ),
-                    HorizontalScroll(),
-                    HomeHeader(
-                      text: 'Train'
-                    ),
-                    HorizontalScroll(),
-                    HomeHeader(
-                      text: 'Trending Categories'
-                    ),
-                    HorizontalScroll(),
-                    HomeHeader(
-                      text: 'Upcoming Events'
-                    ),
-                    HorizontalScroll(),
-                    Padding(padding: EdgeInsets.only(bottom: 30))
-                  ]
+                      HorizontalScroll(),
+                      Padding(
+                        padding: EdgeInsets.only(top: 30),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            StartActivity(),
+                            LogActivity()
+                          ]
+                        ),
+                      ),
+                      HomeHeader(
+                        text: 'Recommended for You'
+                      ),
+                      HorizontalScroll(),
+                      HomeHeader(
+                        text: 'Train'
+                      ),
+                      HorizontalScroll(),
+                      HomeHeader(
+                        text: 'Trending Categories'
+                      ),
+                      HorizontalScroll(),
+                      HomeHeader(
+                        text: 'Upcoming Events'
+                      ),
+                      HorizontalScroll(),
+                      Padding(padding: EdgeInsets.only(bottom: 30))
+                    ]
+                  )
                 )
               );
             }

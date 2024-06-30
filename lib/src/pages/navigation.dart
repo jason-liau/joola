@@ -16,7 +16,7 @@ class NavigationPage extends StatefulWidget {
 class _NavigationPage extends State<NavigationPage> {
   final user = FirebaseAuth.instance.currentUser;
   final List<Widget> pages = [
-    const HomePage(),
+    HomePage(),
     const TrainPage(),
     const WellnessPage(),
     const ServicesPage(),

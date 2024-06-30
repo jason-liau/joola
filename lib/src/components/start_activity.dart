@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:joola/src/components/activity_button.dart';
 import 'package:joola/src/components/home_button.dart';
 import 'package:joola/src/components/home_header.dart';
+import 'package:joola/src/pages/duration.dart';
 
 class StartActivity extends StatelessWidget {
   const StartActivity({
@@ -19,7 +20,7 @@ class StartActivity extends StatelessWidget {
           context: context,
           builder: (BuildContext context) {
             return SizedBox(
-              height: 400,
+              height: 250,
               width: double.infinity,
               child: Container(
                 alignment: Alignment.topLeft,
@@ -40,19 +41,43 @@ class StartActivity extends StatelessWidget {
                           text: 'Pickleball',
                           icon: Icons.sports_tennis,
                           color: Colors.deepPurple.shade300,
-                          onTap: null,
+                          onTap: () {
+                            Navigator.pop(context);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) {
+                                return const DurationPage();
+                              })
+                            );
+                          },
                         ),
                         ActivityButton(
                           text: 'Meditation',
                           icon: Icons.airline_seat_recline_extra,
                           color: Colors.deepPurple.shade300,
-                          onTap: null,
+                          onTap: () {
+                            Navigator.pop(context);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) {
+                                return const DurationPage();
+                              })
+                            );
+                          },
                         ),
                         ActivityButton(
                           text: 'Stretching',
-                          icon: Icons.sports_tennis,
+                          icon: Icons.sports_gymnastics,
                           color: Colors.deepPurple.shade300,
-                          onTap: null,
+                          onTap: () {
+                            Navigator.pop(context);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) {
+                                return const DurationPage();
+                              })
+                            );
+                          },
                         )
                       ]
                     )
