@@ -46,7 +46,7 @@ class StartActivity extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(builder: (context) {
-                                return const DurationPage();
+                                return const DurationPage(icon: Icons.sports_tennis, text: 'Pickleball');
                               })
                             );
                           },
@@ -60,7 +60,7 @@ class StartActivity extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(builder: (context) {
-                                return const DurationPage();
+                                return const DurationPage(icon: Icons.airline_seat_recline_extra, text: 'Meditation');
                               })
                             );
                           },
@@ -74,7 +74,7 @@ class StartActivity extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(builder: (context) {
-                                return const DurationPage();
+                                return const DurationPage(icon: Icons.sports_gymnastics, text: 'Stretching');
                               })
                             );
                           },
