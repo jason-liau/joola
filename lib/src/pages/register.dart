@@ -23,17 +23,17 @@ class _RegisterPageState extends State<RegisterPage> {
   final confirmPasswordController = TextEditingController();
 
   void signUp() async {
-    // Loading
-    showDialog(
-      context: context,
-      builder: (context) {
-        return const Center(
-          child: CircularProgressIndicator()
-        );
-      }
-    );
-
     try {
+      // Loading
+      showDialog(
+        context: context,
+        builder: (context) {
+          return const Center(
+            child: CircularProgressIndicator()
+          );
+        }
+      );
+      
       if (passwordController.text == confirmPasswordController.text) {
         await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: emailController.text,
@@ -42,23 +42,15 @@ class _RegisterPageState extends State<RegisterPage> {
 
         User user = FirebaseAuth.instance.currentUser!;
         await user.updateProfile(displayName: nameController.text);
-
-        if (mounted) {
-          Navigator.of(context).pop();
-        }
       } else {
-        if (mounted) {
-          Navigator.of(context).pop();
-        }
-
         showErrorMessage('Passwords don\'t match');
       }
     } on FirebaseAuthException catch (e) {
-      if (mounted) {
-        Navigator.of(context).pop();
-      }
-      
       showErrorMessage(e.code);
+    } finally {
+      if (mounted) {
+        Navigator.pop(context);
+      }
     }
   }
 

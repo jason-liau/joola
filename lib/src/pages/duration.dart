@@ -20,15 +20,19 @@ class DurationPage extends StatefulWidget {
 
 class _DurationPage extends State<DurationPage> {
   final Stopwatch stopwatch = Stopwatch();
-  String time = '00:00:00';
+  String time = '00:00';
   int countdown = 5;
 
   String parseTime() {
     var second = stopwatch.elapsed.inSeconds;
     String seconds = (second % 60).toString().padLeft(2, "0");
     String minutes = (second ~/ 60).toString().padLeft(2, "0");
-    String hours = (second ~/ 3600).toString().padLeft(2, "0");
- 
+    String hours = (second ~/ 3600).toString();
+    if (hours == '0') {
+      return "$minutes:$seconds";
+    }
+
+    hours = hours.padLeft(2, "0");
     return "$hours:$minutes:$seconds";
   }
 

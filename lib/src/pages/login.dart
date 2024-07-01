@@ -20,30 +20,27 @@ class _LoginPageState extends State<LoginPage> {
   final passwordController = TextEditingController();
 
   void signIn() async {
-    // Loading
-    showDialog(
-      context: context,
-      builder: (context) {
-        return const Center(
-          child: CircularProgressIndicator()
-        );
-      }
-    );
-
     try {
+      // Loading
+      showDialog(
+        context: context,
+        builder: (context) {
+          return const Center(
+            child: CircularProgressIndicator()
+          );
+        }
+      );
+      
       await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: emailController.text,
         password: passwordController.text
       );
-
-      if (mounted) {
-        Navigator.of(context).pop();
-      }
     } on FirebaseAuthException {
-      if (mounted) {
-        Navigator.of(context).pop();
-      }
       showErrorMessage('Incorrect email or password');
+    } finally {
+      if (mounted) {
+        Navigator.pop(context);
+      }
     }
   }
 
