@@ -21,6 +21,7 @@ class DurationPage extends StatefulWidget {
 class _DurationPage extends State<DurationPage> {
   final Stopwatch stopwatch = Stopwatch();
   String time = '00:00:00';
+  int countdown = 5;
 
   String parseTime() {
     var second = stopwatch.elapsed.inSeconds;
@@ -43,11 +44,27 @@ class _DurationPage extends State<DurationPage> {
     });
   }
 
+  void countdownTimer() {
+    Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (mounted) {
+        setState(() {
+          countdown -= 1;
+          if (countdown < 0) {
+            startTimer();
+            stopwatch.start();
+            timer.cancel();
+          }
+        });
+      } else {
+        timer.cancel();
+      }
+    });
+  }
+
   @override
   void initState() {
     super.initState();
-    startTimer();
-    stopwatch.start();
+    countdownTimer();
   }
 
   @override
@@ -87,6 +104,7 @@ class _DurationPage extends State<DurationPage> {
                   ),
                 ]
               ),
+              if (countdown < 0)
               Column(
                 children: [
                   Text(
@@ -109,10 +127,35 @@ class _DurationPage extends State<DurationPage> {
                     ),
                   ),
                 ]
+              )
+              else
+              Column(
+                children: [
+                  const Opacity(
+                    opacity: 0.5,
+                    child: Text(
+                      'Starting in',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 30,
+                      )
+                    ),
+                  ),
+                  Text(
+                    countdown.toString(),
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 80,
+                      fontWeight: FontWeight.bold,
+                      decoration: TextDecoration.none
+                    )
+                  ),
+                ]
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
+                  if (countdown < 0)
                   DurationButton(
                     icon: Icons.stop_rounded,
                     color: const Color.fromARGB(255, 215, 88, 88),
@@ -235,8 +278,17 @@ class _DurationPage extends State<DurationPage> {
                         }
                       );
                     }
+                  )
+                  else
+                  DurationButton(
+                    icon: Icons.stop_rounded,
+                    color: const Color.fromARGB(255, 215, 88, 88),
+                    onTap: () {
+                      stopwatch.stop();
+                      Navigator.pop(context);
+                    }
                   ),
-                  if (stopwatch.isRunning)
+                  if (countdown < 0 && stopwatch.isRunning)
                   DurationButton(
                     icon: Icons.pause,
                     color: const Color.fromARGB(255, 92, 107, 192),
@@ -244,7 +296,7 @@ class _DurationPage extends State<DurationPage> {
                       stopwatch.stop();
                     },
                   )
-                  else
+                  else if (countdown < 0)
                   DurationButton(
                     icon: Icons.play_arrow,
                     color: const Color.fromARGB(255, 92, 107, 192),
