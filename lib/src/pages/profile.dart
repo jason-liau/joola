@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:joola/src/pages/settings.dart';
 import '../utils/utils.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -21,35 +22,44 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        // appBar: AppBar(
-        //   toolbarHeight: Utils.percentHeight(context, .1),
-        // ),
         body: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        SizedBox(height: MediaQuery.of(context).viewPadding.top),
-        Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-          const Icon(Icons.settings, color: Colors.transparent),
-          ToggleBar(
-            controller: controller,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SizedBox(height: MediaQuery.of(context).viewPadding.top),
+          Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+            const Icon(Icons.settings_outlined, color: Colors.transparent, size: 30),
+            ToggleBar(
+              controller: controller,
+            ),
+            Container(
+              alignment: Alignment.topRight,
+              child: IconButton(onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (BuildContext context) {
+                    return const SettingsPage();
+                  })
+                );
+              }, icon: const Icon(Icons.settings, color: Color.fromARGB(255, 64, 64, 162), size: 30)),
+            )
+          ]),
+          Expanded(
+            child: PageView(
+              physics: const NeverScrollableScrollPhysics(),
+              controller: controller,
+              children: const [
+                Column(
+                  children: [Text('profile')],
+                ),
+                Column(
+                  children: [Text('history')],
+                )
+              ],
+            ),
           ),
-          IconButton(onPressed: signOut, icon: const Icon(Icons.settings))
-        ]),
-        Expanded(
-          child: PageView(
-            controller: controller,
-            children: [
-              Column(
-                children: [Text("profile")],
-              ),
-              Column(
-                children: [Text("history")],
-              )
-            ],
-          ),
-        ),
-      ],
-    ));
+        ],
+      )
+    );
   }
 }
 
@@ -79,7 +89,7 @@ class _MyWidgetState extends State<ToggleBar> {
               color: Colors.grey,
             ),
             borderRadius: const BorderRadius.all(Radius.circular(16))),
-        padding: EdgeInsets.all(Utils.percentHeight(context, 0.005)),
+        padding: const EdgeInsets.all(2),
         child: ToggleButtons(
           onPressed: (int index) {
             setState(() {
@@ -99,24 +109,23 @@ class _MyWidgetState extends State<ToggleBar> {
           },
           isSelected: isSelected,
           renderBorder: false,
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(13),
+          selectedColor: const Color.fromARGB(255, 64, 64, 162),
+          selectedBorderColor: const Color.fromARGB(255, 36, 36, 46),
+          tapTargetSize: MaterialTapTargetSize.padded,
           children: <Widget>[
             Container(
-              decoration:
-                  BoxDecoration(borderRadius: BorderRadius.circular(20)),
-              padding: const EdgeInsets.all(10.0),
+              padding: const EdgeInsets.symmetric(horizontal: 35),
               child: const Text(
                 'Overview',
-                style: TextStyle(fontSize: 16),
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400, fontFamily: 'calibri'),
               ),
             ),
             Container(
-              decoration:
-                  BoxDecoration(borderRadius: BorderRadius.circular(20)),
-              padding: const EdgeInsets.all(10.0),
+              padding: const EdgeInsets.symmetric(horizontal: 35),
               child: const Text(
                 'History',
-                style: TextStyle(fontSize: 16),
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400, fontFamily: 'calibri'),
               ),
             ),
           ],

@@ -106,36 +106,36 @@ class HomePage extends StatelessWidget {
                   controller: scrollController,
                   child: const Column(
                     children: [
+                      // HomeHeader(
+                      //   text: 'In Progress'
+                      // ),
+                      // HorizontalScroll(),
                       HomeHeader(
-                        text: 'In Progress'
+                        text: 'Activity'
                       ),
-                      HorizontalScroll(),
-                      Padding(
-                        padding: EdgeInsets.only(top: 30),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            StartActivity(),
-                            LogActivity()
-                          ]
-                        ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          StartActivity(),
+                          LogActivity()
+                        ]
                       ),
-                      HomeHeader(
-                        text: 'Recommended for You'
-                      ),
-                      HorizontalScroll(),
-                      HomeHeader(
-                        text: 'Train'
-                      ),
-                      HorizontalScroll(),
-                      HomeHeader(
-                        text: 'Trending Categories'
-                      ),
-                      HorizontalScroll(),
-                      HomeHeader(
-                        text: 'Upcoming Events'
-                      ),
-                      HorizontalScroll(),
+                      // HomeHeader(
+                      //   text: 'Recommended for You'
+                      // ),
+                      // HorizontalScroll(),
+                      // HomeHeader(
+                      //   text: 'Train'
+                      // ),
+                      // HorizontalScroll(),
+                      // HomeHeader(
+                      //   text: 'Trending Categories'
+                      // ),
+                      // HorizontalScroll(),
+                      // HomeHeader(
+                      //   text: 'Upcoming Events'
+                      // ),
+                      // HorizontalScroll(),
                       Padding(padding: EdgeInsets.only(bottom: 30))
                     ]
                   )

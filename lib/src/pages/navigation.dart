@@ -48,9 +48,11 @@ class _NavigationPage extends State<NavigationPage> {
               selectedItemColor: Colors.white,
               currentIndex: pageIndex,
               onTap: (index) {
-                setState(() {
-                  pageIndex = index;
-                });
+                if (index == 0 || index == 4) {
+                  setState(() {
+                    pageIndex = index;
+                  });
+                }
               },
               type: BottomNavigationBarType.fixed,
               items: const [

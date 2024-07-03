@@ -19,7 +19,6 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  final nameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
@@ -31,9 +30,6 @@ class _RegisterPageState extends State<RegisterPage> {
           email: emailController.text,
           password: encryptPassword(passwordController.text)
         );
-
-        User user = FirebaseAuth.instance.currentUser!;
-        await user.updateProfile(displayName: nameController.text);
       } else {
         showErrorMessage('Passwords don\'t match');
       }
@@ -89,15 +85,6 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
             
                 const SizedBox(height: 25),
-
-                // Name
-                LoginText(
-                  controller: nameController,
-                  hintText: "Name",
-                  obscureText: false
-                ),
-
-                const SizedBox(height: 10),
             
                 // Email
                 LoginText(
