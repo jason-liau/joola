@@ -18,6 +18,8 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
+  crypto: ^3.0.3
+  cloud_firestore: ^5.0.2
 
 dev_dependencies:
   flutter_test:

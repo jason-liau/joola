@@ -1,8 +1,11 @@
+import 'dart:convert';
+import 'package:crypto/crypto.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:joola/src/components/login_button.dart';
 import 'package:joola/src/components/login_text.dart';
 import 'package:joola/src/components/square_tile.dart';
+
 
 class LoginPage extends StatefulWidget {
   final Function()? onTap;
@@ -21,26 +24,12 @@ class _LoginPageState extends State<LoginPage> {
 
   void signIn() async {
     try {
-      // Loading
-      showDialog(
-        context: context,
-        builder: (context) {
-          return const Center(
-            child: CircularProgressIndicator()
-          );
-        }
-      );
-      
       await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: emailController.text,
-        password: passwordController.text
+        password: encryptPassword(passwordController.text)
       );
     } on FirebaseAuthException {
       showErrorMessage('Incorrect email or password');
-    } finally {
-      if (mounted) {
-        Navigator.pop(context);
-      }
     }
   }
 
@@ -53,6 +42,12 @@ class _LoginPageState extends State<LoginPage> {
         );
       }
     );
+  }
+
+  String encryptPassword(String password) {
+    final bytes = utf8.encode(password);
+    final hash = sha256.convert(bytes);
+    return hash.toString();
   }
 
   @override

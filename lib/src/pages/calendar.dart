@@ -20,11 +20,13 @@ class _CalendarPageState extends State<CalendarPage> {
     return Scaffold(
       body: Center(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             TableCalendar(
               firstDay: DateTime.utc(2010, 10, 16),
               lastDay: DateTime.now(),
               focusedDay: _focusedDay,
+              currentDay: _focusedDay,
               calendarFormat: _calendarFormat,
               onFormatChanged: (format) {
                 setState(() {

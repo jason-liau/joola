@@ -248,6 +248,7 @@ class _DurationPage extends State<DurationPage> {
                                           ),
                                           GestureDetector(
                                             onTap: () {
+                                              // add to database
                                               Navigator.of(context)..pop()..pop();
                                             },
                                             child: Container(

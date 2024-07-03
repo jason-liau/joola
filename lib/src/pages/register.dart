@@ -1,4 +1,6 @@
-import 'package:firebase_core/firebase_core.dart';
+import 'dart:convert';
+
+import 'package:crypto/crypto.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:joola/src/components/login_button.dart';
@@ -24,20 +26,10 @@ class _RegisterPageState extends State<RegisterPage> {
 
   void signUp() async {
     try {
-      // Loading
-      showDialog(
-        context: context,
-        builder: (context) {
-          return const Center(
-            child: CircularProgressIndicator()
-          );
-        }
-      );
-      
       if (passwordController.text == confirmPasswordController.text) {
         await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: emailController.text,
-          password: passwordController.text
+          password: encryptPassword(passwordController.text)
         );
 
         User user = FirebaseAuth.instance.currentUser!;
@@ -47,11 +39,13 @@ class _RegisterPageState extends State<RegisterPage> {
       }
     } on FirebaseAuthException catch (e) {
       showErrorMessage(e.code);
-    } finally {
-      if (mounted) {
-        Navigator.pop(context);
-      }
     }
+  }
+
+  String encryptPassword(String password) {
+    final bytes = utf8.encode(password);
+    final hash = sha256.convert(bytes);
+    return hash.toString();
   }
 
   void showErrorMessage(String message) {
