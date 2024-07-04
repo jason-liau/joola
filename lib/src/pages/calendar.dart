@@ -49,14 +49,16 @@ class _CalendarPageState extends State<CalendarPage> {
                 borderRadius: BorderRadius.all(Radius.circular(10))
               ),
               child: GestureDetector(
-                child: const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
-                  child: Text(
-                    'Back',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 30
-                    )
+                child: const InkWell(
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+                    child: Text(
+                      'Back',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 30
+                      )
+                    ),
                   ),
                 ),
                 onTap: () {
