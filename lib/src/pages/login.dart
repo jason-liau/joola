@@ -1,10 +1,9 @@
-import 'dart:convert';
-import 'package:crypto/crypto.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:joola/src/components/login_button.dart';
 import 'package:joola/src/components/login_text.dart';
 import 'package:joola/src/components/square_tile.dart';
+import 'package:joola/src/utils/utils.dart';
 
 
 class LoginPage extends StatefulWidget {
@@ -26,28 +25,20 @@ class _LoginPageState extends State<LoginPage> {
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: emailController.text,
-        password: encryptPassword(passwordController.text)
+        password: passwordController.text
       );
-    } on FirebaseAuthException {
-      showErrorMessage('Incorrect email or password');
+    } on FirebaseAuthException catch (e) {
+      Utils.showErrorMessage(context, e.code);
     }
   }
 
-  void showErrorMessage(String message) {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: Text(message)
-        );
-      }
-    );
-  }
-
-  String encryptPassword(String password) {
-    final bytes = utf8.encode(password);
-    final hash = sha256.convert(bytes);
-    return hash.toString();
+  void resetPassword() async {
+    try {
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: emailController.text);
+      Utils.showErrorMessage(context, 'Sent email to reset password');
+    } on FirebaseAuthException catch (e) {
+      Utils.showErrorMessage(context, e.code);
+    }
   }
 
   @override
@@ -100,17 +91,20 @@ class _LoginPageState extends State<LoginPage> {
                 const SizedBox(height: 10),
             
                 // Forgot password
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Text(
-                        'Forgot password?',
-                        style: TextStyle(color: Colors.grey.shade600)
-                      )
-                    ]
-                  )
+                GestureDetector(
+                  onTap: resetPassword,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 25),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Text(
+                          'Forgot password?',
+                          style: TextStyle(color: Colors.grey.shade600)
+                        )
+                      ]
+                    )
+                  ),
                 ),
             
                 const SizedBox(height: 25),

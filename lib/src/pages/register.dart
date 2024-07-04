@@ -1,11 +1,9 @@
-import 'dart:convert';
-
-import 'package:crypto/crypto.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:joola/src/components/login_button.dart';
 import 'package:joola/src/components/login_text.dart';
 import 'package:joola/src/components/square_tile.dart';
+import 'package:joola/src/utils/utils.dart';
 
 class RegisterPage extends StatefulWidget {
   final Function()? onTap;
@@ -26,33 +24,17 @@ class _RegisterPageState extends State<RegisterPage> {
   void signUp() async {
     try {
       if (passwordController.text == confirmPasswordController.text) {
-        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: emailController.text,
-          password: encryptPassword(passwordController.text)
+          password: passwordController.text
         );
+        await userCredential.user!.sendEmailVerification();
       } else {
-        showErrorMessage('Passwords don\'t match');
+        Utils.showErrorMessage(context, 'Passwords don\'t match');
       }
     } on FirebaseAuthException catch (e) {
-      showErrorMessage(e.code);
+      Utils.showErrorMessage(context, e.code);
     }
-  }
-
-  String encryptPassword(String password) {
-    final bytes = utf8.encode(password);
-    final hash = sha256.convert(bytes);
-    return hash.toString();
-  }
-
-  void showErrorMessage(String message) {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: Text(message)
-        );
-      }
-    );
   }
 
   @override
