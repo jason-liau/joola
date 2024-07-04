@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:joola/src/components/list_button.dart';
@@ -11,11 +12,17 @@ class AccountSettings extends StatelessWidget {
 
   Future<void> updateName(BuildContext context, List<TextEditingController> controllers) async {
     try {
+      String uuid = FirebaseAuth.instance.currentUser!.uid;
+      final db = FirebaseFirestore.instance;
+      final sfDocRef = db.collection('Users').doc(uuid);
+      final firstName = controllers.first.text;
+      final lastName = controllers.last.text;
+      sfDocRef.update({'first_name': firstName, 'last_name': lastName});
       await FirebaseAuth.instance.currentUser!.updateDisplayName(controllers.last.text);
       Navigator.pop(context);
       Utils.showErrorMessage(context, 'Updated name');
-    } on FirebaseAuthException catch (e) {
-      Utils.showErrorMessage(context, e.code);
+    } catch (e) {
+      Utils.showErrorMessage(context, e.toString());
     }
   }
 
@@ -26,7 +33,7 @@ class AccountSettings extends StatelessWidget {
       await user.reauthenticateWithCredential(credential);
       await user.verifyBeforeUpdateEmail(controllers.last.text);
       Navigator.pop(context);
-      Utils.showErrorMessage(context, 'Send email verification link');
+      Utils.showErrorMessage(context, 'Sent email verification link');
     } on FirebaseAuthException catch (e) {
       Utils.showErrorMessage(context, e.code);
     }
@@ -34,6 +41,14 @@ class AccountSettings extends StatelessWidget {
 
   Future<void> updatePassword(BuildContext context, List<TextEditingController> controllers) async {
     try {
+      if (controllers[1].text != controllers.last.text) {
+        Utils.showErrorMessage(context, 'New passwords do not match');
+        return;
+      }
+
+      User user = FirebaseAuth.instance.currentUser!;
+      AuthCredential credential = EmailAuthProvider.credential(email: user.email!, password: controllers.first.text);
+      await user.reauthenticateWithCredential(credential);
       await FirebaseAuth.instance.currentUser!.updatePassword(controllers.last.text);
       Navigator.pop(context);
       Utils.showErrorMessage(context, 'Updated password');
@@ -79,8 +94,8 @@ class AccountSettings extends StatelessWidget {
                   context: context,
                   builder: (BuildContext context) {
                     return SettingsPopup(
-                      texts: const ['Name'],
-                      obscures: const [false],
+                      texts: const ['First Name', 'Last Name'],
+                      obscures: const [false, false],
                       action: updateName
                     );
                   }
