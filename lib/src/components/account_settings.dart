@@ -44,8 +44,6 @@ class AccountSettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(Utils.weekStamp(DateTime.now()));
-    print(Utils.weekDate(Utils.weekStamp(DateTime.now())));
     return Column(
       children: [
         Container(

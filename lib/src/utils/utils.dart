@@ -22,12 +22,12 @@ class Utils {
     );
   }
 
-  static int monthStamp(DateTime date) {
+  static int monthstamp(DateTime date) {
     date = date.toUtc();
     return date.year * 12 + date.month;
   }
 
-  static DateTime monthDate(int monthstamp) {
+  static DateTime monthdate(int monthstamp) {
     double yearMonth = monthstamp / 12;
     if (monthstamp % 12 == 0) {
       int year = yearMonth.truncate() - 1;
@@ -39,13 +39,21 @@ class Utils {
     return DateTime(year, month);
   }
 
-  static int weekStamp(DateTime date) {
+  static DateTime monthdateFromDate(DateTime date) {
+    return monthdate(monthstamp(date));
+  }
+
+  static int weekstamp(DateTime date) {
     date = date.toUtc();
     DateTime weekDate = date.subtract(Duration(days: date.weekday - 1));
     return (weekDate.difference(weekStart).inDays / 7).truncate();
   }
 
-  static DateTime weekDate(int weekstamp) {
+  static DateTime weekdate(int weekstamp) {
     return weekStart.add(Duration(days: weekstamp * 7));
+  }
+
+  static DateTime weekdateFromDate(DateTime date) {
+    return weekdate(weekstamp(date));
   }
 }
