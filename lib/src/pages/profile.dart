@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:joola/src/pages/settings.dart';
 import '../utils/utils.dart';
+import 'overview.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({
@@ -23,43 +24,42 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SizedBox(height: MediaQuery.of(context).viewPadding.top),
-          Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-            const Icon(Icons.settings_outlined, color: Colors.transparent, size: 30),
-            ToggleBar(
-              controller: controller,
-            ),
-            Container(
-              alignment: Alignment.topRight,
-              child: IconButton(onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (BuildContext context) {
-                    return const SettingsPage();
-                  })
-                );
-              }, icon: const Icon(Icons.settings, color: Color.fromARGB(255, 64, 64, 162), size: 30)),
-            )
-          ]),
-          Expanded(
-            child: PageView(
-              physics: const NeverScrollableScrollPhysics(),
-              controller: controller,
-              children: const [
-                Column(
-                  children: [Text('profile')],
-                ),
-                Column(
-                  children: [Text('history')],
-                )
-              ],
-            ),
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        SizedBox(height: MediaQuery.of(context).viewPadding.top),
+        Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+          const Icon(Icons.settings_outlined,
+              color: Colors.transparent, size: 30),
+          ToggleBar(
+            controller: controller,
           ),
-        ],
-      )
-    );
+          Container(
+            alignment: Alignment.topRight,
+            child: IconButton(
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (BuildContext context) {
+                    return const SettingsPage();
+                  }));
+                },
+                icon: const Icon(Icons.settings,
+                    color: Color.fromARGB(255, 64, 64, 162), size: 30)),
+          )
+        ]),
+        Expanded(
+          child: PageView(
+            physics: const NeverScrollableScrollPhysics(),
+            controller: controller,
+            children: const [
+              OverviewPage(),
+              Column(
+                children: [Text('history')],
+              )
+            ],
+          ),
+        ),
+      ],
+    ));
   }
 }
 
@@ -118,14 +118,20 @@ class _MyWidgetState extends State<ToggleBar> {
               padding: const EdgeInsets.symmetric(horizontal: 35),
               child: const Text(
                 'Overview',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400, fontFamily: 'calibri'),
+                style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w400,
+                    fontFamily: 'calibri'),
               ),
             ),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 35),
               child: const Text(
                 'History',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400, fontFamily: 'calibri'),
+                style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w400,
+                    fontFamily: 'calibri'),
               ),
             ),
           ],
