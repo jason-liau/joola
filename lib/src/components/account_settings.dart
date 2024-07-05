@@ -14,11 +14,10 @@ class AccountSettings extends StatelessWidget {
     try {
       String uuid = FirebaseAuth.instance.currentUser!.uid;
       final db = FirebaseFirestore.instance;
-      final sfDocRef = db.collection('Users').doc(uuid);
+      final docRef = db.collection('Users').doc(uuid);
       final firstName = controllers.first.text;
       final lastName = controllers.last.text;
-      sfDocRef.update({'first_name': firstName, 'last_name': lastName});
-      await FirebaseAuth.instance.currentUser!.updateDisplayName(controllers.last.text);
+      docRef.set({'first_name': firstName, 'last_name': lastName}, SetOptions(merge: true));
       Navigator.pop(context);
       Utils.showErrorMessage(context, 'Updated name');
     } catch (e) {
