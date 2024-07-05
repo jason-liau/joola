@@ -36,7 +36,7 @@ class Utils {
     
     int year = yearMonth.truncate();
     int month = monthstamp % 12;
-    return DateTime(year, month);
+    return DateTime.utc(year, month);
   }
 
   static DateTime monthdateFromDate(DateTime date) {

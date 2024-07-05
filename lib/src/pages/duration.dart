@@ -23,7 +23,7 @@ class DurationPage extends StatefulWidget {
 
 class _DurationPage extends State<DurationPage> {
   final Stopwatch stopwatch = Stopwatch();
-  DateTime start = DateTime.now();
+  DateTime start = DateTime.now().toUtc();
   String time = '00:00';
   int countdown = 5;
 
@@ -74,7 +74,7 @@ class _DurationPage extends State<DurationPage> {
     if (duration <= 0) {
       return;
     }
-    int timestamp = start.millisecondsSinceEpoch ~/ Duration.millisecondsPerSecond;
+    int timestamp = start.millisecondsSinceEpoch;
     String activity = widget.text;
     String uuid = FirebaseAuth.instance.currentUser!.uid;
     final db = FirebaseFirestore.instance;
