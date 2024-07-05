@@ -11,7 +11,6 @@ class CalendarPage extends StatefulWidget {
 }
 
 class _CalendarPageState extends State<CalendarPage> {
-  CalendarFormat _calendarFormat = CalendarFormat.month;
   DateTime _selectedDay = DateTime.now();
   DateTime _focusedDay = DateTime.now();
   
@@ -27,12 +26,26 @@ class _CalendarPageState extends State<CalendarPage> {
               lastDay: DateTime.now(),
               focusedDay: _focusedDay,
               currentDay: _focusedDay,
-              calendarFormat: _calendarFormat,
-              onFormatChanged: (format) {
-                setState(() {
-                  _calendarFormat = format;
-                });
-              },
+              availableCalendarFormats: const {CalendarFormat.month : 'Month'},
+              sixWeekMonthsEnforced: true,
+              calendarBuilders: CalendarBuilders(
+                headerTitleBuilder: (BuildContext context, DateTime date) {
+                  return Row(
+                    children: [
+                      const Text('Log Activity'),
+                      Text('${date.month} ${date.year}')
+                    ],
+                  );
+                },
+              ),
+              calendarStyle: const CalendarStyle(
+                isTodayHighlighted: false
+              ),
+              headerStyle: const HeaderStyle(
+                titleCentered: true,
+                formatButtonVisible: false,
+              ),
+
               selectedDayPredicate: (day) {
                 return isSameDay(_selectedDay, day);
               },

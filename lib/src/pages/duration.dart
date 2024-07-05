@@ -1,8 +1,11 @@
 import 'dart:async';
 import 'dart:ui';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:joola/src/components/duration_button.dart';
+import 'package:joola/src/utils/utils.dart';
 
 class DurationPage extends StatefulWidget {
   final IconData icon;
@@ -20,14 +23,15 @@ class DurationPage extends StatefulWidget {
 
 class _DurationPage extends State<DurationPage> {
   final Stopwatch stopwatch = Stopwatch();
+  DateTime start = DateTime.now();
   String time = '00:00';
   int countdown = 5;
 
   String parseTime() {
-    var second = stopwatch.elapsed.inSeconds;
-    String seconds = (second % 60).toString().padLeft(2, "0");
-    String minutes = (second ~/ 60).toString().padLeft(2, "0");
-    String hours = (second ~/ 3600).toString();
+    int duration = stopwatch.elapsed.inSeconds;
+    String seconds = (duration % Duration.secondsPerMinute).toString().padLeft(2, "0");
+    String minutes = (duration ~/ Duration.secondsPerMinute).toString().padLeft(2, "0");
+    String hours = (duration ~/ Duration.secondsPerHour).toString();
     if (hours == '0') {
       return "$minutes:$seconds";
     }
@@ -63,6 +67,23 @@ class _DurationPage extends State<DurationPage> {
         timer.cancel();
       }
     });
+  }
+
+  void endActivity() {
+    int duration = stopwatch.elapsed.inSeconds;
+    if (duration <= 0) {
+      return;
+    }
+    int timestamp = start.millisecondsSinceEpoch ~/ Duration.millisecondsPerSecond;
+    String activity = widget.text;
+    String uuid = FirebaseAuth.instance.currentUser!.uid;
+    final db = FirebaseFirestore.instance;
+    String weekstamp = Utils.weekstamp(start).toString();
+    String monthstamp = Utils.monthstamp(start).toString();
+    final weekDocRef = db.collection('Users').doc(uuid).collection('MonthlyActivities').doc(weekstamp);
+    final monthDocRef = db.collection('Users').doc(uuid).collection('WeeklyActivities').doc(monthstamp);
+    weekDocRef.set({'activities': FieldValue.arrayUnion([{'activity': activity, 'duration': duration, 'timestamp': timestamp}])}, SetOptions(merge: true));
+    monthDocRef.set({'activities': FieldValue.arrayUnion([{'activity': activity, 'duration': duration, 'timestamp': timestamp}])}, SetOptions(merge: true));
   }
 
   @override
@@ -248,7 +269,7 @@ class _DurationPage extends State<DurationPage> {
                                           ),
                                           GestureDetector(
                                             onTap: () {
-                                              // add to database
+                                              endActivity();
                                               Navigator.of(context)..pop()..pop();
                                             },
                                             child: Container(

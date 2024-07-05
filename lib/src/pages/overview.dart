@@ -108,18 +108,18 @@ class _MyWidgetState extends State<OverviewPage> {
                               const MoodCheckIn(),
                               SizedBox(
                                   height: Utils.percentHeight(context, padding)),
-                              Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    const Text('Health Trends',
-                                        style: TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.bold)),
-                                    TextButton(
-                                        onPressed: checkIn,
-                                        child: const Text('+ Check In', style: const TextStyle(color: Colors.blue, fontSize: 16, )))
-                                  ]),
+                              // Row(
+                              //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              //     children: [
+                              //       const Text('Health Trends',
+                              //           style: TextStyle(
+                              //               color: Colors.black,
+                              //               fontSize: 20,
+                              //               fontWeight: FontWeight.bold)),
+                              //       TextButton(
+                              //           onPressed: checkIn,
+                              //           child: const Text('+ Check In', style: const TextStyle(color: Colors.blue, fontSize: 16, )))
+                              //     ]),
                             ])))));
       }
     );
