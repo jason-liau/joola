@@ -86,7 +86,7 @@ class _MyWidgetState extends State<ToggleBar> {
     return Container(
         decoration: BoxDecoration(
             border: Border.all(
-              color: Colors.grey,
+              color: Colors.black12,
             ),
             borderRadius: const BorderRadius.all(Radius.circular(16))),
         padding: const EdgeInsets.all(2),
@@ -111,7 +111,7 @@ class _MyWidgetState extends State<ToggleBar> {
           renderBorder: false,
           borderRadius: BorderRadius.circular(13),
           selectedColor: const Color.fromARGB(255, 64, 64, 162),
-          selectedBorderColor: const Color.fromARGB(255, 36, 36, 46),
+          selectedBorderColor: Colors.white,
           tapTargetSize: MaterialTapTargetSize.padded,
           children: <Widget>[
             Container(

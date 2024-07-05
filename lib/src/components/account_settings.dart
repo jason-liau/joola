@@ -58,6 +58,7 @@ class AccountSettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final List<String> titles = ['Edit Profile', 'Update Email', 'Update Password'];
     return Column(
       children: [
         Container(
@@ -77,11 +78,7 @@ class AccountSettings extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(bottom: 30),
           child: ListButton(
-            texts: const [
-              'Edit Profile',
-              'Update Email',
-              'Update Password'
-            ],
+            texts: titles,
             icons: const [
               Icon(Icons.manage_accounts_rounded, color: Color.fromARGB(255, 250, 150, 258), size: 35),
               Icon(Icons.email, color: Color(0xFFDC729D), size: 35),
@@ -93,8 +90,10 @@ class AccountSettings extends StatelessWidget {
                   context: context,
                   builder: (BuildContext context) {
                     return SettingsPopup(
+                      title: titles[0],
                       texts: const ['First Name', 'Last Name'],
                       obscures: const [false, false],
+                      keyboardTypes: const [TextInputType.text, TextInputType.text],
                       action: updateName
                     );
                   }
@@ -105,8 +104,10 @@ class AccountSettings extends StatelessWidget {
                   context: context,
                   builder: (BuildContext context) {
                     return SettingsPopup(
+                      title: titles[1],
                       texts: const ['Password', 'Email'],
                       obscures: const [true, false],
+                      keyboardTypes: const [TextInputType.text, TextInputType.emailAddress],
                       action: updateEmail
                     );
                   }
@@ -117,8 +118,10 @@ class AccountSettings extends StatelessWidget {
                   context: context,
                   builder: (BuildContext context) {
                     return SettingsPopup(
+                      title: titles[2],
                       texts: const ['Old Password', 'New Password', 'Confirm New Password'],
                       obscures: const [true, true, true],
+                      keyboardTypes: const [TextInputType.text, TextInputType.text, TextInputType.text],
                       action: updatePassword
                     );
                   }

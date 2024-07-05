@@ -4,14 +4,18 @@ import 'package:flutter/material.dart';
 import 'package:joola/src/components/login_text.dart';
 
 class SettingsPopup extends StatefulWidget {
+  final String title;
   final List<String> texts;
   final List<bool> obscures;
+  final List<TextInputType> keyboardTypes;
   final Function(BuildContext, List<TextEditingController>) action;
 
   const SettingsPopup({
     super.key,
+    required this.title,
     required this.texts,
     required this.obscures,
+    required this.keyboardTypes,
     required this.action
   });
 
@@ -40,18 +44,12 @@ class _SettingsPopupState extends State<SettingsPopup> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Padding(
-              padding: const EdgeInsets.only(top: 20, left: 20, right: 20, bottom: 15),
+              padding: const EdgeInsets.only(top: 30, left: 30, right: 20, bottom: 15),
               child: Row(
                 children: [
-                  IconButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    icon: const Icon(Icons.arrow_back)
-                  ),
-                  const Text(
-                    'Update Name',
-                    style: TextStyle(
+                  Text(
+                    widget.title,
+                    style: const TextStyle(
                       fontSize: 25,
                     )
                   ),
@@ -64,35 +62,65 @@ class _SettingsPopupState extends State<SettingsPopup> {
                 child: LoginText(
                   controller: controllers[i],
                   hintText: widget.texts[i],
+                  keyboardType: widget.keyboardTypes[i],
                   obscureText: widget.obscures[i]
                 ),
               );
             }),
             Padding(
-              padding: const EdgeInsets.only(bottom: 20, top: 15),
-              child: GestureDetector(
-                onTap: () {
-                  widget.action(context, controllers);
-                },
-                child: Container(
-                  alignment: Alignment.center,
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                    color: Color.fromARGB(255, 34, 34, 34)
+              padding: const EdgeInsets.only(bottom: 30, top: 15, left: 30, right: 30),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: Container(
+                      alignment: Alignment.center,
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        color: Color.fromARGB(255, 215, 88, 88)
+                      ),
+                      width: 140,
+                      child: const Padding(
+                        padding: EdgeInsets.all(10),
+                        child: Text(
+                          'Cancel',
+                          style: TextStyle(
+                            fontSize: 22,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          )
+                        ),
+                      ),
+                    )
                   ),
-                  width: 150,
-                  child: const Padding(
-                    padding: EdgeInsets.all(10),
-                    child: Text(
-                      'Submit',
-                      style: TextStyle(
-                        fontSize: 22,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      )
-                    ),
+                  GestureDetector(
+                    onTap: () {
+                      widget.action(context, controllers);
+                    },
+                    child: Container(
+                      alignment: Alignment.center,
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        color: Color.fromARGB(255, 34, 34, 34)
+                      ),
+                      width: 140,
+                      child: const Padding(
+                        padding: EdgeInsets.all(10),
+                        child: Text(
+                          'Submit',
+                          style: TextStyle(
+                            fontSize: 22,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          )
+                        ),
+                      ),
+                    )
                   ),
-                )
+                ],
               )
             ),
           ]

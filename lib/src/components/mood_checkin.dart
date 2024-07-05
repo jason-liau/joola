@@ -28,7 +28,7 @@ class _MoodCheckInState extends State<MoodCheckIn> {
               Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
                 Container(
                     decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(50)),
+                        shape: BoxShape.circle  ,
                         color: Color(0xFFFFD0D0)),
                     child: const Icon(Icons.sentiment_very_dissatisfied_rounded,
                         size: 50, color: Color(0xFFEF5350))),
@@ -37,7 +37,7 @@ class _MoodCheckInState extends State<MoodCheckIn> {
               Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
                 Container(
                     decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(50)),
+                        shape: BoxShape.circle,
                         color: Color(0xFFFFE9D4)),
                     child: const Icon(Icons.sentiment_dissatisfied_rounded,
                         size: 50, color: Color(0xFFFF8A65))),
@@ -46,7 +46,7 @@ class _MoodCheckInState extends State<MoodCheckIn> {
               Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
                 Container(
                     decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(50)),
+                        shape: BoxShape.circle,
                         color: Color(0xFFFFEFC0)),
                     child: const Icon(Icons.sentiment_neutral_rounded,
                         size: 50, color: Color(0xFFF0B31B))),
@@ -55,7 +55,7 @@ class _MoodCheckInState extends State<MoodCheckIn> {
               Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
                 Container(
                     decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(50)),
+                        shape: BoxShape.circle,
                         color: Color(0xFFDBF1FC)),
                     child: const Icon(Icons.sentiment_satisfied_rounded,
                         size: 50, color: Color(0xFF4FC3F7))),
@@ -64,8 +64,8 @@ class _MoodCheckInState extends State<MoodCheckIn> {
               Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
                 Container(
                     decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(50)),
-                        color: Color(0xFFACEFAE)),
+                        color: Color(0xFFACEFAE),
+                        shape: BoxShape.circle),
                     child: const Icon(Icons.sentiment_very_satisfied_rounded,
                         size: 50, color: Color(0xFF66BB6A))),
                 const Text("Great", style: TextStyle(color: Color(0xFF66BB6A)))

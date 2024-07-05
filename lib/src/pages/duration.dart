@@ -79,11 +79,10 @@ class _DurationPage extends State<DurationPage> {
     String uuid = FirebaseAuth.instance.currentUser!.uid;
     final db = FirebaseFirestore.instance;
     String weekstamp = Utils.weekstamp(start).toString();
-    String monthstamp = Utils.monthstamp(start).toString();
-    final weekDocRef = db.collection('Users').doc(uuid).collection('MonthlyActivities').doc(weekstamp);
-    final monthDocRef = db.collection('Users').doc(uuid).collection('WeeklyActivities').doc(monthstamp);
+    final docRef = db.collection('Activities').doc(uuid);
+    final weekDocRef = db.collection('Activities').doc(uuid).collection('WeeklyActivities').doc(weekstamp);
+    docRef.set({'activities': FieldValue.arrayUnion([{'activity': activity, 'duration': duration, 'timestamp': timestamp}])}, SetOptions(merge: true));
     weekDocRef.set({'activities': FieldValue.arrayUnion([{'activity': activity, 'duration': duration, 'timestamp': timestamp}])}, SetOptions(merge: true));
-    monthDocRef.set({'activities': FieldValue.arrayUnion([{'activity': activity, 'duration': duration, 'timestamp': timestamp}])}, SetOptions(merge: true));
   }
 
   @override

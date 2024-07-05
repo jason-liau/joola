@@ -97,10 +97,30 @@ class _HomePageState extends State<HomePage> {
                   horizontal: 30,
                   vertical: 60
                 ),
-                child: Text(
-                    firstName.isEmpty ? 'Welcome!' : 'Welcome, $firstName!',
-                    style: const TextStyle(fontSize: 24, color: Colors.white),
-                ),
+                child: Builder(builder: (context) {
+                  return firstName == '' ? RichText(
+                    text: const TextSpan(
+                      style: TextStyle(
+                        fontSize: 24,
+                        color: Colors.white,
+                      ),
+                      children: <TextSpan>[
+                        TextSpan(text: 'Welcome!')
+                      ]
+                    ),
+                  ) : RichText(
+                    text: TextSpan(
+                      style: const TextStyle(
+                        fontSize: 24,
+                        color: Colors.white,
+                      ),
+                      children: <TextSpan>[
+                        const TextSpan(text: 'Welcome, '),
+                        TextSpan(text: '$firstName!', style: const TextStyle(fontWeight: FontWeight.bold)),
+                      ]
+                    ),
+                  );
+                })
               ),
               DraggableScrollableSheet(
                 snap: true,
