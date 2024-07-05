@@ -1,8 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:joola/src/pages/history.dart';
 import 'package:joola/src/pages/settings.dart';
 import '../utils/utils.dart';
 import 'overview.dart';
+import 'history.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({
@@ -52,9 +54,7 @@ class _ProfilePageState extends State<ProfilePage> {
             controller: controller,
             children: const [
               OverviewPage(),
-              Column(
-                children: [Text('history')],
-              )
+              HistoryPage(),
             ],
           ),
         ),
