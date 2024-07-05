@@ -27,7 +27,10 @@ class _HomePageState extends State<HomePage> {
         stream: FirebaseFirestore.instance.collection('Users').doc(uuid).snapshots(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            firstName = snapshot.data!.data()!['first_name'];
+            final data = snapshot.data!.data();
+            if (data != null) {
+              firstName = data['first_name'] ?? '';
+            }
           }
           return Stack(
             children: [

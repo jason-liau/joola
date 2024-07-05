@@ -35,15 +35,18 @@ class _MyWidgetState extends State<OverviewPage> {
       stream: usersStream,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          Map<String, dynamic> data = snapshot.data!.data() as Map<String, dynamic>;
-          String firstName = data['first_name'];
-          String lastName = data['last_name'];
-          if (firstName != '' && lastName != '') {
-            name = '$firstName $lastName';
-          } else if (firstName != '') {
-            name = firstName;
-          } else if (lastName != '') {
-            name = lastName;
+          final data = snapshot.data!.data();
+          if (data != null) {
+            Map<String, dynamic> data = snapshot.data!.data() as Map<String, dynamic>;
+            String firstName = data['first_name'] ?? '';
+            String lastName = data['last_name'] ?? '';
+            if (firstName != '' && lastName != '') {
+              name = '$firstName $lastName';
+            } else if (firstName != '') {
+              name = firstName;
+            } else if (lastName != '') {
+              name = lastName;
+            }
           }
         }
         return SingleChildScrollView(
