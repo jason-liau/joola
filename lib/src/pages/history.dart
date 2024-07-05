@@ -12,7 +12,7 @@ class HistoryPage extends StatelessWidget {
         child: Column(children: [
           Stack(alignment: Alignment.bottomCenter, children: [
             Column(children: [
-              CalendarPage(),
+              const CalendarPage(),
               SizedBox(height: Utils.percentHeight(context, .045))
             ]),
             const CalendarStreak(),
@@ -27,6 +27,8 @@ class HistoryPage extends StatelessWidget {
 // 3) The difference between the bottom of CalendarStreak and the bottom of Calendar is 
 // in the class HistoryPage, in the SizedBox right below CalendarPage
 class CalendarStreak extends StatelessWidget {
+  
+
   const CalendarStreak({super.key});
 
   @override

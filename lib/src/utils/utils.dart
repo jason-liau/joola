@@ -1,7 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class Utils {
-  static DateTime weekStart = DateTime.utc(1);
+  static DateTime weekStart = DateTime(1).subtract(const Duration(days: 1));
 
   static double percentHeight(BuildContext context, double percent) {
     return MediaQuery.sizeOf(context).height * percent;
@@ -22,30 +24,8 @@ class Utils {
     );
   }
 
-  static int monthstamp(DateTime date) {
-    date = date.toUtc();
-    return date.year * 12 + date.month;
-  }
-
-  static DateTime monthdate(int monthstamp) {
-    double yearMonth = monthstamp / 12;
-    if (monthstamp % 12 == 0) {
-      int year = yearMonth.truncate() - 1;
-      return DateTime.utc(year, 12);
-    }
-    
-    int year = yearMonth.truncate();
-    int month = monthstamp % 12;
-    return DateTime.utc(year, month);
-  }
-
-  static DateTime monthdateFromDate(DateTime date) {
-    return monthdate(monthstamp(date));
-  }
-
   static int weekstamp(DateTime date) {
-    date = date.toUtc();
-    DateTime weekDate = date.subtract(Duration(days: date.weekday - 1));
+    DateTime weekDate = date.subtract(Duration(days: date.weekday % 7));
     return (weekDate.difference(weekStart).inDays / 7).truncate();
   }
 
@@ -53,7 +33,12 @@ class Utils {
     return weekStart.add(Duration(days: weekstamp * 7));
   }
 
-  static DateTime weekdateFromDate(DateTime date) {
-    return weekdate(weekstamp(date));
+  static void logActivity(String activity, int duration, int timestamp) {
+    String uuid = FirebaseAuth.instance.currentUser!.uid;
+    final db = FirebaseFirestore.instance;
+    final docRef = db.collection('Activities').doc(uuid);
+    final weekDocRef = db.collection('Activities').doc(uuid).collection('Week').doc(weekstamp(DateTime.fromMillisecondsSinceEpoch(timestamp)).toString());
+    docRef.set({'activities': FieldValue.arrayUnion([{'activity': activity, 'duration': duration, 'timestamp': timestamp}])}, SetOptions(merge: true));
+    weekDocRef.set({'activities': FieldValue.arrayUnion([{'activity': activity, 'duration': duration, 'timestamp': timestamp}])}, SetOptions(merge: true));
   }
 }

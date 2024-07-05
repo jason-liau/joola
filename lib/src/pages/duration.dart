@@ -23,7 +23,7 @@ class DurationPage extends StatefulWidget {
 
 class _DurationPage extends State<DurationPage> {
   final Stopwatch stopwatch = Stopwatch();
-  DateTime start = DateTime.now().toUtc();
+  DateTime start = DateTime.now();
   String time = '00:00';
   int countdown = 5;
 
@@ -69,20 +69,19 @@ class _DurationPage extends State<DurationPage> {
     });
   }
 
-  void endActivity() {
-    int duration = stopwatch.elapsed.inSeconds;
-    if (duration <= 0) {
-      return;
+  void endActivity(context) {
+    try {
+      int duration = stopwatch.elapsed.inSeconds;
+      if (duration <= 0) {
+        return;
+      }
+      int timestamp = start.millisecondsSinceEpoch;
+      String activity = widget.text;
+      Utils.logActivity(activity, duration, timestamp);
+      Navigator.of(context)..pop()..pop();
+    } catch (e) {
+      Utils.showErrorMessage(context, e.toString());
     }
-    int timestamp = start.millisecondsSinceEpoch;
-    String activity = widget.text;
-    String uuid = FirebaseAuth.instance.currentUser!.uid;
-    final db = FirebaseFirestore.instance;
-    String weekstamp = Utils.weekstamp(start).toString();
-    final docRef = db.collection('Activities').doc(uuid);
-    final weekDocRef = db.collection('Activities').doc(uuid).collection('WeeklyActivities').doc(weekstamp);
-    docRef.set({'activities': FieldValue.arrayUnion([{'activity': activity, 'duration': duration, 'timestamp': timestamp}])}, SetOptions(merge: true));
-    weekDocRef.set({'activities': FieldValue.arrayUnion([{'activity': activity, 'duration': duration, 'timestamp': timestamp}])}, SetOptions(merge: true));
   }
 
   @override
@@ -268,8 +267,7 @@ class _DurationPage extends State<DurationPage> {
                                           ),
                                           GestureDetector(
                                             onTap: () {
-                                              endActivity();
-                                              Navigator.of(context)..pop()..pop();
+                                              endActivity(context);
                                             },
                                             child: Container(
                                               height: 55,

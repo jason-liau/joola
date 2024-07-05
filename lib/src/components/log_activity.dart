@@ -24,12 +24,9 @@ class LogActivity extends StatelessWidget {
           keyboardTypes: const [TextInputType.text, TextInputType.number],
           action: (BuildContext context, List<TextEditingController> controllers) {
             try {
-              String uuid = FirebaseAuth.instance.currentUser!.uid;
-              final db = FirebaseFirestore.instance;
-              final docRef = db.collection('Activities').doc(uuid);
               final String activity = controllers.first.text;
               final int duration = int.parse(controllers.last.text);
-              docRef.set({'activities': FieldValue.arrayUnion([{'activity': activity, 'duration': duration, 'timestamp': timestamp}])}, SetOptions(merge: true));
+              Utils.logActivity(activity, duration, timestamp);
               Navigator.pop(context);
               Utils.showErrorMessage(context, 'Logged activity');
             } catch (e) {

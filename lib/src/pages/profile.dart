@@ -89,7 +89,7 @@ class _MyWidgetState extends State<ToggleBar> {
               color: Colors.black12,
             ),
             borderRadius: const BorderRadius.all(Radius.circular(16))),
-        padding: const EdgeInsets.all(2),
+        padding: const EdgeInsets.all(1),
         child: ToggleButtons(
           onPressed: (int index) {
             setState(() {
@@ -109,7 +109,7 @@ class _MyWidgetState extends State<ToggleBar> {
           },
           isSelected: isSelected,
           renderBorder: false,
-          borderRadius: BorderRadius.circular(13),
+          borderRadius: BorderRadius.circular(14.5),
           selectedColor: const Color.fromARGB(255, 64, 64, 162),
           selectedBorderColor: Colors.white,
           tapTargetSize: MaterialTapTargetSize.padded,

@@ -58,6 +58,7 @@ class _CalendarPageState extends State<CalendarPage> {
           Map<String, dynamic> data = snapshot.data!.data() as Map<String, dynamic>;
           if (data.containsKey('activities')) {
             var activities = data['activities'];
+            activeDays = {};
             for (Map<String, dynamic> activity in activities) {
               var timestamp = activity['timestamp'];
               DateTime date = DateTime.fromMillisecondsSinceEpoch(timestamp);
@@ -75,7 +76,7 @@ class _CalendarPageState extends State<CalendarPage> {
             onCalendarCreated: (pageController) {
               _pageController = pageController;
             },
-            firstDay: DateTime.utc(2010, 10, 16),
+            firstDay: DateTime(1970, 1, 1),
             lastDay: DateTime.now(),
             focusedDay: DateTime.now(),
             currentDay: DateTime.now(),
