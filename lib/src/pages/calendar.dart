@@ -287,9 +287,9 @@ class _CalendarPageState extends State<CalendarPage> {
 }
 
 class Chevron extends StatelessWidget {
-  Chevron({super.key, this.isRight = true});
+  const Chevron({super.key, this.isRight = true});
 
-  bool isRight;
+  final bool isRight;
 
   @override
   Widget build(BuildContext context) {
@@ -327,9 +327,9 @@ class CalendarStreak extends StatelessWidget {
         decoration: BoxDecoration(
             color: const Color(0xFF222222), borderRadius: BorderRadius.circular(16)),
         child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-          Streak(number: "$active ${active == 1 ? 'Day' : 'Days'}", unit: "Active"),
-          Streak(number: "$longestStreak ${longestStreak == 1 ? 'Day' : 'Days'}", unit: "Longest Streak"),
-          Streak(number: "$streak ${streak == 1 ? 'Day' : 'Days'}", unit: "Streak"),
+          Expanded(child: Streak(number: "$active ${active == 1 ? 'Day' : 'Days'}", unit: "Active")),
+          Expanded(child: Streak(number: "$longestStreak ${longestStreak == 1 ? 'Day' : 'Days'}", unit: "Longest Streak")),
+          Expanded(child: Streak(number: "$streak ${streak == 1 ? 'Day' : 'Days'}", unit: "Streak")),
         ]));
   }
 }

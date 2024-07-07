@@ -10,7 +10,7 @@ class Stats extends StatelessWidget {
     return SizedBox(
       height: Utils.percentHeight(context, 0.25),
       child: const Column(mainAxisAlignment: MainAxisAlignment.spaceBetween ,children: [
-        Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+        Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
           StatUnit(
             count: "5 hrs",
             type: "Activity",
@@ -26,7 +26,7 @@ class Stats extends StatelessWidget {
             botColor: Color(0xFFE98AB1)
           ),
         ]),
-        Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+        Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
           StatUnit(
             count: "102",
             type: "Total Classes",
@@ -42,7 +42,7 @@ class Stats extends StatelessWidget {
             botColor: Color(0xFF59BFCE)
           )
         ]),
-        Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+        Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
           StatUnit(
             count: "60 days",
             type: "Joined JOOLA",
@@ -63,7 +63,6 @@ class Stats extends StatelessWidget {
   }
 }
 
-// TODO: write some custom function that only bolds the integers passed in
 class StatUnit extends StatelessWidget {
   final String count;
   final String type;

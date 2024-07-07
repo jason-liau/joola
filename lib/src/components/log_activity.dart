@@ -1,10 +1,7 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:joola/src/components/home_button.dart';
 import 'package:joola/src/components/settings_popup.dart';
 import 'package:joola/src/pages/calendar.dart';
-import 'package:joola/src/pages/history.dart';
 import 'package:joola/src/utils/utils.dart';
 
 class LogActivity extends StatelessWidget {

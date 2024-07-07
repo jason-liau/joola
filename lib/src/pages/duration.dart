@@ -1,8 +1,6 @@
 import 'dart:async';
 import 'dart:ui';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:joola/src/components/duration_button.dart';
 import 'package:joola/src/utils/utils.dart';
