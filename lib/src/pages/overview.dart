@@ -67,7 +67,7 @@ class _MyWidgetState extends State<OverviewPage> {
                                           0.18), // this needs to be double the avatar radius
                                       height: Utils.percentWidth(context, 0.18)),
                                   CircleAvatar(
-                                      radius: Utils.percentWidth(context, 0.09)),
+                                      radius: Utils.percentWidth(context, 0.1)),
                                   Container(
                                       width: Utils.percentWidth(context, 0.07),
                                       height: Utils.percentWidth(context, 0.07),
@@ -101,7 +101,7 @@ class _MyWidgetState extends State<OverviewPage> {
                                   textAlign: TextAlign.left,
                                   style: TextStyle(
                                       color: Colors.black,
-                                      fontSize: 20,
+                                      fontSize: 25,
                                       fontWeight: FontWeight.bold)),
                               SizedBox(
                                   height: Utils.percentHeight(context, padding)),

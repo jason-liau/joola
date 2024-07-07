@@ -35,10 +35,14 @@ class Utils {
 
   static void logActivity(String activity, int duration, int timestamp) {
     String uuid = FirebaseAuth.instance.currentUser!.uid;
+    DateTime date = DateTime.fromMillisecondsSinceEpoch(timestamp);
+    int week = weekstamp(date);
     final db = FirebaseFirestore.instance;
     final docRef = db.collection('Activities').doc(uuid);
-    final weekDocRef = db.collection('Activities').doc(uuid).collection('Week').doc(weekstamp(DateTime.fromMillisecondsSinceEpoch(timestamp)).toString());
+    final weekDocRef = db.collection('Activities').doc(uuid).collection('Week').doc(week.toString());
+    final nextWeekDocRef = db.collection('Activities').doc(uuid).collection('Week').doc((week + 1).toString());
     docRef.set({'activities': FieldValue.arrayUnion([{'activity': activity, 'duration': duration, 'timestamp': timestamp}])}, SetOptions(merge: true));
-    weekDocRef.set({'activities': FieldValue.arrayUnion([{'activity': activity, 'duration': duration, 'timestamp': timestamp}])}, SetOptions(merge: true));
+    weekDocRef.set({'duration': FieldValue.increment(duration), 'previous_duration': FieldValue.increment(0), 'days_active': {(date.weekday % 7).toString(): FieldValue.increment(1)}}, SetOptions(merge: true));
+    nextWeekDocRef.set({'duration': FieldValue.increment(0), 'previous_duration': FieldValue.increment(duration)}, SetOptions(merge: true));
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:joola/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:joola/src/app.dart';
@@ -20,5 +21,6 @@ void main() async {
   // Run the app and pass in the SettingsController. The app listens to the
   // SettingsController for changes, then passes it further down to the
   // SettingsView.
-  runApp(Application(settingsController: settingsController));
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+      .then((value) => runApp(Application(settingsController: settingsController)));
 }

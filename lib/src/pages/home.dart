@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:joola/src/components/days_active.dart';
 import 'package:joola/src/components/home_header.dart';
 import 'package:joola/src/components/log_activity.dart';
 import 'package:joola/src/components/start_activity.dart';
@@ -121,6 +122,13 @@ class _HomePageState extends State<HomePage> {
                     ),
                   );
                 })
+              ),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 150),
+                decoration: const BoxDecoration(
+                  color: Colors.transparent
+                ),
+                child: const DaysActive()
               ),
               DraggableScrollableSheet(
                 snap: true,
