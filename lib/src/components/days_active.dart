@@ -7,6 +7,7 @@ import 'package:joola/src/utils/utils.dart';
 const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 int duration = 0;
 int prevDuration = 0;
+int prevPrevDuration = 0;
 Map<String, bool> daysActive = {};
 
 class DaysActive extends StatefulWidget {
@@ -33,18 +34,17 @@ class _DaysActiveState extends State<DaysActive> {
   }
 
   String formatDouble(double d) {
-    String formatted = d.toStringAsFixed(2);
-    if (formatted.substring(formatted.length - 2) == '00') {
-      return formatted.substring(0, formatted.length - 3);
-    }
+    String formatted = d.toStringAsFixed(1);
     if (formatted.substring(formatted.length - 1) == '0') {
-      return formatted.substring(0, formatted.length - 1);
+      return formatted.substring(0, formatted.length - 2);
     }
     return formatted;
   }
 
   @override
   Widget build(BuildContext context) {
+    int durationDiff = prevDuration - prevPrevDuration;
+    print(durationDiff);
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
@@ -54,12 +54,16 @@ class _DaysActiveState extends State<DaysActive> {
             final data = snapshot.data!.data()!;
             duration = 0;
             prevDuration = 0;
+            prevPrevDuration = 0;
             daysActive = {};
             if (data.containsKey('duration')) {
               duration = data['duration'].round();
             }
             if (data.containsKey('previous_duration')) {
               prevDuration = data['previous_duration'].round();
+            }
+            if (data.containsKey('previous_previous_duration')) {
+              prevPrevDuration = data['previous_previous_duration'].round();
             }
             if (data.containsKey('days_active')) {
               final days = data['days_active'];
@@ -115,31 +119,31 @@ class _DaysActiveState extends State<DaysActive> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        if (duration - prevDuration > 0)
+                        if (durationDiff > 0)
                         Row(
                           children: [
-                            Text('${durationString(duration - prevDuration).split(' ')[0]} ', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 30, color: Color(0xFFDFF20F))),
+                            Text('${durationString(durationDiff).split(' ')[0]} ', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 30, color: Color(0xFFDFF20F))),
                             Stack(
                               children: [
                                 const Icon(Icons.trending_up, color:Color(0xFFDFF20F)),
                                 Padding(
                                   padding: const EdgeInsets.only(top: 17, bottom: 4),
-                                  child: Text(durationString(duration - prevDuration).split(' ')[1], style: const TextStyle(color: Color(0xFFDFF20F))),
+                                  child: Text(durationString(durationDiff).split(' ')[1], style: const TextStyle(color: Color(0xFFDFF20F))),
                                 ),
                               ]
                             )
                           ],
                         )
-                        else if (duration - prevDuration < 0)
+                        else if (durationDiff < 0)
                         Row(
                           children: [
-                            Text('${durationString(duration - prevDuration).split(' ')[0]} ', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 30, color: Colors.white)),
+                            Text('${durationString(durationDiff).split(' ')[0]} ', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 30, color: Color(0xffebb914))),
                             Stack(
                               children: [
-                                const Icon(Icons.trending_down, color:Colors.white),
+                                const Icon(Icons.trending_down, color:Color(0xffebb914)),
                                 Padding(
                                   padding: const EdgeInsets.only(top: 17, bottom: 4),
-                                  child: Text(durationString(duration - prevDuration).split(' ')[1], style: const TextStyle(color: Colors.white)),
+                                  child: Text(durationString(durationDiff).split(' ')[1], style: const TextStyle(color: Color(0xffebb914))),
                                 ),
                               ]
                             )
@@ -148,13 +152,13 @@ class _DaysActiveState extends State<DaysActive> {
                         else
                         Row(
                           children: [
-                            Text('${durationString(duration - prevDuration).split(' ')[0]} ', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 30, color: Colors.white)),
+                            Text('${durationString(durationDiff).split(' ')[0]} ', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 30, color: Colors.white)),
                             Stack(
                               children: [
                                 const Icon(Icons.trending_flat, color:Colors.white),
                                 Padding(
                                   padding: const EdgeInsets.only(top: 17, bottom: 4),
-                                  child: Text(durationString(duration - prevDuration).split(' ')[1], style: const TextStyle(color: Colors.white)),
+                                  child: Text(durationString(durationDiff).split(' ')[1], style: const TextStyle(color: Colors.white)),
                                 ),
                               ]
                             )
