@@ -8,6 +8,7 @@ import '../utils/utils.dart';
 Map<String, bool> activeDays = {}; // y-m-d -> isActive
 Map<String, int> monthlyDaysActive = {}; // y-m -> daysActive
 Map<String, int> longestStreak = {}; // y-m -> streak
+int streak = 0;
 
 class CalendarPage extends StatefulWidget {
   final Function(BuildContext, DateTime)? action;
@@ -82,6 +83,22 @@ class _CalendarPageState extends State<CalendarPage> {
     return maxStreak;
   }
 
+  int getStreak() {
+    if (streak > 0) {
+      return streak;
+    }
+    DateTime date = DateTime.now();
+    if (activeDays[dateKey(date)] ?? false) {
+      streak = 1;
+    }
+    date = date.subtract(const Duration(days: 1));
+    while (activeDays[dateKey(date)] ?? false) {
+      streak += 1;
+      date = date.subtract(const Duration(days: 1));
+    }
+    return streak;
+  }
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<DocumentSnapshot>(
@@ -94,6 +111,7 @@ class _CalendarPageState extends State<CalendarPage> {
             activeDays = {};
             monthlyDaysActive = {};
             longestStreak = {};
+            streak = 0;
             for (Map<String, dynamic> activity in activities) {
               var timestamp = activity['timestamp'];
               DateTime date = DateTime.fromMillisecondsSinceEpoch(timestamp);
@@ -104,8 +122,6 @@ class _CalendarPageState extends State<CalendarPage> {
             }
           }
         }
-
-        print(activeDays);
 
         return Padding(
           padding: const EdgeInsets.all(35),
@@ -258,7 +274,7 @@ class _CalendarPageState extends State<CalendarPage> {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 440),
-                  child: Center(child: CalendarStreak(active: monthlyDaysActive[monthKey(current)] ?? 0, longestStreak: getLongestStreak(current),)),
+                  child: Center(child: CalendarStreak(active: monthlyDaysActive[monthKey(current)] ?? 0, longestStreak: getLongestStreak(current), streak: getStreak())),
                 ),
                 ]
               ),
@@ -311,9 +327,9 @@ class CalendarStreak extends StatelessWidget {
         decoration: BoxDecoration(
             color: const Color(0xFF222222), borderRadius: BorderRadius.circular(16)),
         child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-          Streak(number: "$active Days", unit: "Active"),
-          Streak(number: "$longestStreak Days", unit: "Longest Streak"),
-          Streak(number: "$streak Week", unit: "Streak"),
+          Streak(number: "$active ${active == 1 ? 'Day' : 'Days'}", unit: "Active"),
+          Streak(number: "$longestStreak ${longestStreak == 1 ? 'Day' : 'Days'}", unit: "Longest Streak"),
+          Streak(number: "$streak ${streak == 1 ? 'Day' : 'Days'}", unit: "Streak"),
         ]));
   }
 }
