@@ -43,8 +43,6 @@ class _DaysActiveState extends State<DaysActive> {
 
   @override
   Widget build(BuildContext context) {
-    int durationDiff = prevDuration - prevPrevDuration;
-    print(durationDiff);
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
@@ -119,31 +117,31 @@ class _DaysActiveState extends State<DaysActive> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        if (durationDiff > 0)
+                        if (prevDuration - prevPrevDuration > 0)
                         Row(
                           children: [
-                            Text('${durationString(durationDiff).split(' ')[0]} ', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 30, color: Color(0xFFDFF20F))),
+                            Text('${durationString(prevDuration - prevPrevDuration).split(' ')[0]} ', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 30, color: Color(0xFFDFF20F))),
                             Stack(
                               children: [
                                 const Icon(Icons.trending_up, color:Color(0xFFDFF20F)),
                                 Padding(
                                   padding: const EdgeInsets.only(top: 17, bottom: 4),
-                                  child: Text(durationString(durationDiff).split(' ')[1], style: const TextStyle(color: Color(0xFFDFF20F))),
+                                  child: Text(durationString(prevDuration - prevPrevDuration).split(' ')[1], style: const TextStyle(color: Color(0xFFDFF20F))),
                                 ),
                               ]
                             )
                           ],
                         )
-                        else if (durationDiff < 0)
+                        else if (prevDuration - prevPrevDuration < 0)
                         Row(
                           children: [
-                            Text('${durationString(durationDiff).split(' ')[0]} ', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 30, color: Color(0xffebb914))),
+                            Text('${durationString(prevDuration - prevPrevDuration).split(' ')[0]} ', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 30, color: Color(0xffebb914))),
                             Stack(
                               children: [
                                 const Icon(Icons.trending_down, color:Color(0xffebb914)),
                                 Padding(
                                   padding: const EdgeInsets.only(top: 17, bottom: 4),
-                                  child: Text(durationString(durationDiff).split(' ')[1], style: const TextStyle(color: Color(0xffebb914))),
+                                  child: Text(durationString(prevDuration - prevPrevDuration).split(' ')[1], style: const TextStyle(color: Color(0xffebb914))),
                                 ),
                               ]
                             )
@@ -152,13 +150,13 @@ class _DaysActiveState extends State<DaysActive> {
                         else
                         Row(
                           children: [
-                            Text('${durationString(durationDiff).split(' ')[0]} ', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 30, color: Colors.white)),
+                            Text('${durationString(prevDuration - prevPrevDuration).split(' ')[0]} ', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 30, color: Colors.white)),
                             Stack(
                               children: [
                                 const Icon(Icons.trending_flat, color:Colors.white),
                                 Padding(
                                   padding: const EdgeInsets.only(top: 17, bottom: 4),
-                                  child: Text(durationString(durationDiff).split(' ')[1], style: const TextStyle(color: Colors.white)),
+                                  child: Text(durationString(prevDuration - prevPrevDuration).split(' ')[1], style: const TextStyle(color: Colors.white)),
                                 ),
                               ]
                             )
