@@ -50,35 +50,24 @@ class LogActivity extends StatelessWidget {
           MaterialPageRoute(builder: (BuildContext context) {
             return Scaffold(
               backgroundColor: Colors.white,
-              body: Padding(
-                padding: const EdgeInsets.all(35),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Column(children: [
-                      Stack(alignment: Alignment.bottomCenter, children: [
-                        Column(children: [
-                          CalendarPage(action: log),
-                          SizedBox(height: Utils.percentHeight(context, .045))
-                        ]),
-                        const CalendarStreak(),
-                      ])
-                    ]),
-                    TextButton(
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
-                        decoration: const BoxDecoration(
-                          color: Color.fromARGB(255, 114, 46, 231),
-                          borderRadius: BorderRadius.all(Radius.circular(10))
-                        ),
-                        child: const Text('Back', style: TextStyle(color: Colors.white))
+              body: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [CalendarPage(action: log),
+                  TextButton(
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+                      decoration: const BoxDecoration(
+                        color: Color.fromARGB(255, 114, 46, 231),
+                        borderRadius: BorderRadius.all(Radius.circular(10))
                       ),
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                    )
-                  ],
-                )),
+                      child: const Text('Back', style: TextStyle(color: Colors.white))
+                    ),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  )
+                ],
+              ),
             );
           })
         );
