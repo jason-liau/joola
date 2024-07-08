@@ -22,8 +22,8 @@ class HomeButton extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(10),
         child: Container(
-          height: Utils.percentHeight(context, 0.115),
-          width: Utils.percentHeight(context, 0.18),
+          height: Utils.percentWidth(context, 0.25),
+          width: Utils.percentWidth(context, 0.4),
           decoration: BoxDecoration(
             color: color,
             borderRadius: BorderRadius.circular(20)
@@ -34,13 +34,13 @@ class HomeButton extends StatelessWidget {
               Icon(
                 icon,
                 color: Colors.white,
-                size: Utils.percentHeight(context, 0.045),
+                size: Utils.percentWidth(context, 0.1),
               ),
               Text(
                 text,
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: Utils.percentHeight(context, 0.02),
+                  fontSize: Utils.percentWidth(context, 0.045),
                   fontWeight: FontWeight.bold
                 )
               ),

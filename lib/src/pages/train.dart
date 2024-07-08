@@ -8,14 +8,6 @@ class TrainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: Center(
-        child: Text(
-          'Train Page',
-          style: TextStyle(
-            fontSize: 40
-          ),
-        )
-      )
     );
   }
 }

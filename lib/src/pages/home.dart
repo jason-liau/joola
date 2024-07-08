@@ -23,6 +23,10 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    print((MediaQuery.of(context).viewPadding.top + 10 + Utils.percentWidth(context, 0.18)) / MediaQuery.sizeOf(context).height);
+    print(MediaQuery.sizeOf(context).height);
+    print(MediaQuery.sizeOf(context).width + Utils.percentWidth(context, 0.18) + MediaQuery.of(context).viewPadding.top);
+    print(1 - (MediaQuery.sizeOf(context).width + Utils.percentWidth(context, 0.18) + MediaQuery.of(context).viewPadding.top) / MediaQuery.sizeOf(context).height);
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 64, 64, 162),
       body: StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
@@ -125,7 +129,7 @@ class _HomePageState extends State<HomePage> {
                 })
               ),
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 30, vertical: MediaQuery.of(context).viewPadding.top + 10 + Utils.percentWidth(context, 0.18)),
+                padding: EdgeInsets.symmetric(horizontal: 30, vertical: MediaQuery.of(context).viewPadding.top + 10 + Utils.percentWidth(context, 0.21)),
                 decoration: const BoxDecoration(
                   color: Colors.transparent
                 ),
@@ -133,8 +137,8 @@ class _HomePageState extends State<HomePage> {
               ),
               DraggableScrollableSheet(
                 snap: true,
-                initialChildSize: 0.60,
-                minChildSize: 0.60,
+                initialChildSize: 1 - (Utils.percentWidth(context, 0.7) + MediaQuery.of(context).viewPadding.top + 10) / MediaQuery.sizeOf(context).height,
+                minChildSize: 1 - (Utils.percentWidth(context, 0.7) + MediaQuery.of(context).viewPadding.top + 10) / MediaQuery.sizeOf(context).height,
                 maxChildSize: 1,
                 builder: (BuildContext context, ScrollController scrollController) {
                   return Container(

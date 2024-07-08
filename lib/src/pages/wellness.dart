@@ -8,14 +8,6 @@ class WellnessPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: Center(
-        child: Text(
-          'Wellness Page',
-          style: TextStyle(
-            fontSize: 40
-          ),
-        )
-      )
     );
   }
 }

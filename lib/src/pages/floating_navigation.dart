@@ -19,7 +19,7 @@ class _FloatingNavigationPageState extends State<FloatingNavigationPage>
     with SingleTickerProviderStateMixin {
   final user = FirebaseAuth.instance.currentUser;
   final List<Widget> pages = [
-    HomePage(),
+    const HomePage(),
     const TrainPage(),
     const WellnessPage(),
     const ServicesPage(),
@@ -34,6 +34,7 @@ class _FloatingNavigationPageState extends State<FloatingNavigationPage>
     FirebaseAuth.instance.signOut();
   }
 
+  @override
   void initState() {
     pageIndex = 0;
     tabController = TabController(length: pages.length, vsync: this);
@@ -64,54 +65,54 @@ class _FloatingNavigationPageState extends State<FloatingNavigationPage>
   Widget build(BuildContext context) {
     return Scaffold(
         body: BottomBar(
+      body: (context, controller) => TabBarView(
+        controller: tabController,
+        physics: const BouncingScrollPhysics(),
+        children: pages,
+      ),
+      borderRadius: const BorderRadius.all(Radius.circular(16)),
+      width: Utils.percentWidth(context, 0.86),
+      barAlignment: Alignment.bottomCenter,
+      showIcon: false,
+      offset: Utils.percentHeight(context, 0.03),
       child: TabBar(
-          overlayColor: MaterialStateProperty.all(Colors.transparent),
+          overlayColor: WidgetStateProperty.all(Colors.transparent),
           controller: tabController,
           labelColor: Colors.white,
           unselectedLabelColor: Colors.grey,
           labelStyle: const TextStyle(fontSize: 12),
           indicatorColor: Colors.transparent,
           dividerColor: Colors.transparent,
-          labelPadding: EdgeInsets.all(0.0),
+          labelPadding: const EdgeInsets.all(0.0),
           tabs: [
-            Tab(text: "Home", icon: Icon(
+            Tab(text: "Home", icon: Icon(size: Utils.percentWidth(context, 0.06),
                 pageIndex == 0? Icons.home : Icons.home_outlined,
                 color: pageIndex == 0 ? Colors.white : Colors.grey,
               ),
             ),
             Tab(
-              text: "Train", icon: Icon(
+              text: "Train", icon: Icon(size: Utils.percentWidth(context, 0.06),
                 pageIndex == 1 ? Icons.sports_tennis : Icons.sports_tennis_outlined,
                 color: pageIndex == 1 ? Colors.white : Colors.grey,
               ),
             ),
             Tab(
-              text: "Wellness", icon: Icon(
+              text: "Wellness", icon: Icon(size: Utils.percentWidth(context, 0.06),
                 pageIndex == 2 ? Icons.favorite : Icons.favorite_border_outlined,
                 color: pageIndex == 2 ? Colors.white : Colors.grey,
               ),
             ),
             Tab(
                 text: "Services",
-                icon: Icon(pageIndex == 3 ? Icons.feed : Icons.feed_outlined,
+                icon: Icon(size: Utils.percentWidth(context, 0.06), pageIndex == 3 ? Icons.feed : Icons.feed_outlined,
                     color: pageIndex == 3 ? Colors.white : Colors.grey)),
             Tab(
               text: "Profile",
-              icon: Icon(pageIndex == 4 ? Icons.account_circle : Icons.account_circle_outlined,
+              icon: Icon(size: Utils.percentWidth(context, 0.06), pageIndex == 4 ? Icons.account_circle : Icons.account_circle_outlined,
                 color: pageIndex == 4 ? Colors.white : Colors.grey,
               ),
             ),
           ]),
-      body: (context, controller) => TabBarView(
-        controller: tabController,
-        physics: const BouncingScrollPhysics(),
-        children: pages,
-      ),
-      borderRadius: BorderRadius.all(Radius.circular(16)),
-      width: Utils.percentWidth(context, 0.86),
-      barAlignment: Alignment.bottomCenter,
-      showIcon: false,
-      offset: Utils.percentHeight(context, 0.03),
     ));
   }
 }
