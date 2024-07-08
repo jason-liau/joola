@@ -5,6 +5,7 @@ import 'package:joola/src/components/days_active.dart';
 import 'package:joola/src/components/home_header.dart';
 import 'package:joola/src/components/log_activity.dart';
 import 'package:joola/src/components/start_activity.dart';
+import 'package:joola/src/utils/utils.dart';
 
 String firstName = '';
 
@@ -53,11 +54,11 @@ class _HomePageState extends State<HomePage> {
                 )
               ),
               Positioned(
-                top: -50,
-                left: -200,
+                top: -Utils.percentWidth(context, 0.1),
+                left: -Utils.percentWidth(context, 0.45),
                 child: Container(
-                  width: 500,
-                  height: 500,
+                  width: Utils.percentWidth(context, 1.12),
+                  height: Utils.percentWidth(context, 1.12),
                   decoration: const BoxDecoration(
                     gradient: LinearGradient(
                       begin: Alignment.topCenter,
@@ -74,11 +75,11 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               Positioned(
-                top: -20,
-                left: -230,
+                top: -Utils.percentWidth(context, 0.035),
+                left: -Utils.percentWidth(context, 0.515),
                 child: Container(
-                  width: 500,
-                  height: 500,
+                  width: Utils.percentWidth(context, 1.12),
+                  height: Utils.percentWidth(context, 1.12),
                   decoration: const BoxDecoration(
                     gradient: LinearGradient(
                       begin: Alignment.topCenter,
@@ -94,9 +95,9 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(
+                padding: EdgeInsets.symmetric(
                   horizontal: 30,
-                  vertical: 60
+                  vertical: MediaQuery.of(context).viewPadding.top + 10,
                 ),
                 child: Builder(builder: (context) {
                   return firstName == '' ? RichText(
@@ -124,7 +125,7 @@ class _HomePageState extends State<HomePage> {
                 })
               ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 150),
+                padding: EdgeInsets.symmetric(horizontal: 30, vertical: MediaQuery.of(context).viewPadding.top + 10 + Utils.percentWidth(context, 0.18)),
                 decoration: const BoxDecoration(
                   color: Colors.transparent
                 ),

@@ -156,10 +156,10 @@ class _CalendarPageState extends State<CalendarPage> {
                             return Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                const Text(
+                                Text(
                                   'Monthly Activity',
                                   style: TextStyle(
-                                      color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
+                                      color: Colors.white, fontWeight: FontWeight.bold, fontSize: Utils.percentWidth(context, .045)),
                                 ),
                                 SizedBox(width: Utils.percentWidth(context, 0.05)),
                                 Expanded(
@@ -167,14 +167,14 @@ class _CalendarPageState extends State<CalendarPage> {
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
                                     GestureDetector(
-                                        onTap: _onLeftChevronTap, child: Chevron(isRight: false)),
+                                        onTap: _onLeftChevronTap, child: const Chevron(isRight: false)),
                                     Text(
                                       DateFormat.MMMM().format(date),
-                                      style: const TextStyle(color: Colors.white, fontSize: 18),
+                                      style: TextStyle(color: Colors.white, fontSize: Utils.percentWidth(context, .04)),
                                     ),
                                     GestureDetector(
                                         onTap: _onRightChevronTap,
-                                        child: Chevron(
+                                        child: const Chevron(
                                           isRight: true,
                                         ))
                                   ]),
@@ -233,20 +233,20 @@ class _CalendarPageState extends State<CalendarPage> {
                           ),
                           markerDecoration: const BoxDecoration(color: Colors.green, shape: BoxShape.circle),
                           tablePadding:
-                              EdgeInsets.only(top: 10, left: 10, right: 10, bottom: 10 + Utils.percentHeight(context, 0.045))),
-                        headerStyle: HeaderStyle(
+                              const EdgeInsets.only(top: 10, left: 10, right: 10)),
+                        headerStyle: const HeaderStyle(
                             headerPadding: EdgeInsets.fromLTRB(
-                                Utils.percentWidth(context, 0.05),
-                                Utils.percentHeight(context, 0.015),
-                                Utils.percentWidth(context, 0.02),
-                                Utils.percentHeight(context, 0.015)),
+                                18,
+                                18,
+                                18,
+                                18),
                             headerMargin:
-                                EdgeInsets.only(bottom: Utils.percentHeight(context, 0.01)),
+                                EdgeInsets.only(bottom: 10),
                             leftChevronVisible: false,
                             rightChevronVisible: false,
                             titleCentered: true,
                             formatButtonVisible: false,
-                            decoration: const BoxDecoration(
+                            decoration: BoxDecoration(
                                 color: Color(0xFF222222),
                                 borderRadius: BorderRadius.only(
                                     topLeft: Radius.circular(12),
@@ -273,7 +273,7 @@ class _CalendarPageState extends State<CalendarPage> {
                   ],
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 440),
+                  padding: EdgeInsets.only(top: Utils.percentWidth(context, 1)),
                   child: Center(child: CalendarStreak(active: monthlyDaysActive[monthKey(current)] ?? 0, longestStreak: getLongestStreak(current), streak: getStreak())),
                 ),
                 ]
@@ -345,10 +345,10 @@ class Streak extends StatelessWidget {
     return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
       Text(number,
           style:
-              const TextStyle(fontSize: 16, fontWeight: FontWeight.w900, color: Colors.lime)),
+              TextStyle(fontSize: Utils.percentWidth(context, .035), fontWeight: FontWeight.w900, color: Colors.lime)),
       Text(unit,
           style:
-              const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.white))
+              TextStyle(fontSize: Utils.percentWidth(context, .03), fontWeight: FontWeight.w400, color: Colors.white))
     ]);
   }
 }

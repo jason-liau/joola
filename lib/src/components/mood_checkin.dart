@@ -44,14 +44,14 @@ class _MoodCheckInState extends State<MoodCheckIn> {
               child:
                   Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                 if (mood == 0)
-                const Text(
+                Text(
                   "How are you feeling today?",
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                  style: TextStyle(fontSize: Utils.percentWidth(context, 0.04), fontWeight: FontWeight.w500),
                 )
                 else
-                const Text(
+                Text(
                   "Checked in",
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                  style: TextStyle(fontSize: Utils.percentWidth(context, 0.04), fontWeight: FontWeight.w500),
                 ),
                 if (mood == 0)
                 SizedBox(height: Utils.percentHeight(context, 0.02)),
@@ -66,8 +66,8 @@ class _MoodCheckInState extends State<MoodCheckIn> {
                           decoration: const BoxDecoration(
                               shape: BoxShape.circle  ,
                               color: Color(0xFFFFD0D0)),
-                          child: const Icon(Icons.sentiment_very_dissatisfied_rounded,
-                              size: 50, color: Color(0xFFEF5350))),
+                          child: Icon(Icons.sentiment_very_dissatisfied_rounded,
+                              size: Utils.percentWidth(context, 0.12), color: Color(0xFFEF5350))),
                     ),
                     const Text("Awful", style: TextStyle(color: Color(0xFFEF5350)))
                   ]),
@@ -80,8 +80,8 @@ class _MoodCheckInState extends State<MoodCheckIn> {
                           decoration: const BoxDecoration(
                               shape: BoxShape.circle,
                               color: Color(0xFFFFE9D4)),
-                          child: const Icon(Icons.sentiment_dissatisfied_rounded,
-                              size: 50, color: Color(0xFFFF8A65))),
+                          child: Icon(Icons.sentiment_dissatisfied_rounded,
+                              size: Utils.percentWidth(context, 0.12), color: Color(0xFFFF8A65))),
                     ),
                     const Text("Bad", style: TextStyle(color: Color(0xFFFF8A65)))
                   ]),
@@ -94,8 +94,8 @@ class _MoodCheckInState extends State<MoodCheckIn> {
                           decoration: const BoxDecoration(
                               shape: BoxShape.circle,
                               color: Color(0xFFFFEFC0)),
-                          child: const Icon(Icons.sentiment_neutral_rounded,
-                              size: 50, color: Color(0xFFF0B31B))),
+                          child: Icon(Icons.sentiment_neutral_rounded,
+                              size: Utils.percentWidth(context, 0.12), color: Color(0xFFF0B31B))),
                     ),
                     const Text("Okay", style: TextStyle(color: Color(0xFFF0B31B)))
                   ]),
@@ -108,8 +108,8 @@ class _MoodCheckInState extends State<MoodCheckIn> {
                           decoration: const BoxDecoration(
                               shape: BoxShape.circle,
                               color: Color(0xFFDBF1FC)),
-                          child: const Icon(Icons.sentiment_satisfied_rounded,
-                              size: 50, color: Color(0xFF4FC3F7))),
+                          child: Icon(Icons.sentiment_satisfied_rounded,
+                              size: Utils.percentWidth(context, 0.12), color: Color(0xFF4FC3F7))),
                     ),
                     const Text("Good", style: TextStyle(color: Color(0xFF4FC3F7)))
                   ]),
@@ -122,8 +122,8 @@ class _MoodCheckInState extends State<MoodCheckIn> {
                           decoration: const BoxDecoration(
                               color: Color(0xFFACEFAE),
                               shape: BoxShape.circle),
-                          child: const Icon(Icons.sentiment_very_satisfied_rounded,
-                              size: 50, color: Color(0xFF66BB6A))),
+                          child: Icon(Icons.sentiment_very_satisfied_rounded,
+                              size: Utils.percentWidth(context, 0.12), color: Color(0xFF66BB6A))),
                     ),
                     const Text("Great", style: TextStyle(color: Color(0xFF66BB6A)))
                   ]),

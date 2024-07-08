@@ -90,7 +90,7 @@ class StatUnit extends StatelessWidget {
                 ).createShader(bounds),
                 child: Icon(
                   icon,
-                  size: 40,
+                  size: Utils.percentWidth(context, 0.1),
                 ),
               ),
               SizedBox(width: Utils.percentWidth(context, 0.02)),
@@ -98,7 +98,7 @@ class StatUnit extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     BoldStatCount(count: count),
-                    Text(type)]
+                    Text(type, style: TextStyle(fontSize: Utils.percentWidth(context, 0.035)))]
                   )
             ])));
   }
@@ -124,9 +124,9 @@ class BoldStatCount extends StatelessWidget {
 
     return RichText(
       text: TextSpan(
-        style: const TextStyle(
-          fontSize: 20,
-          color: Colors.white,
+        style: TextStyle(
+          fontSize: Utils.percentWidth(context, 0.045),
+          color: Colors.black,
         ),
         children: <TextSpan>[
           ...List.generate(splitted.length, (int i) {
@@ -137,10 +137,10 @@ class BoldStatCount extends StatelessWidget {
 
             final t = splitted[i];
             if (isNumeric(t)) {
-              return TextSpan(text: t + separator, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Colors.black));
+              return TextSpan(text: t + separator, style: const TextStyle(fontWeight: FontWeight.bold));
             }
             
-            return TextSpan(text: t + separator, style: const TextStyle(fontSize: 20, color: Colors.black));
+            return TextSpan(text: t + separator);
           })
         ]
       ),

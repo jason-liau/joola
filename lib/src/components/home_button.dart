@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:joola/src/utils/utils.dart';
 
 class HomeButton extends StatelessWidget {
   final String text;
@@ -21,8 +22,8 @@ class HomeButton extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(10),
         child: Container(
-          height: 110,
-          width: 180,
+          height: Utils.percentHeight(context, 0.115),
+          width: Utils.percentHeight(context, 0.18),
           decoration: BoxDecoration(
             color: color,
             borderRadius: BorderRadius.circular(20)
@@ -33,13 +34,13 @@ class HomeButton extends StatelessWidget {
               Icon(
                 icon,
                 color: Colors.white,
-                size: 40
+                size: Utils.percentHeight(context, 0.045),
               ),
               Text(
                 text,
-                style: const TextStyle(
+                style: TextStyle(
                   color: Colors.white,
-                  fontSize: 20,
+                  fontSize: Utils.percentHeight(context, 0.02),
                   fontWeight: FontWeight.bold
                 )
               ),
