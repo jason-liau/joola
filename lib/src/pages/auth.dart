@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:joola/src/pages/login.dart';
 import 'package:joola/src/pages/navigation.dart';
+import 'package:joola/src/pages/floating_navigation.dart';
 import 'package:joola/src/pages/register.dart';
 
 class AuthPage extends StatefulWidget {
@@ -28,7 +29,7 @@ class _AuthPageState extends State<AuthPage> {
         builder: (context, snapshot) {
           // User is logged in
           if (snapshot.hasData) {
-            return const NavigationPage();
+            return const FloatingNavigationPage();
           } else {
             if (showLoginPage) {
               return LoginPage(
