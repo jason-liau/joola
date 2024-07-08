@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class Utils {
-  static DateTime weekStart = DateTime(1).subtract(const Duration(days: 1));
+  static DateTime start = DateTime(1).subtract(const Duration(days: 1));
 
   static double percentHeight(BuildContext context, double percent) {
     return MediaQuery.sizeOf(context).height * percent;
@@ -26,11 +26,19 @@ class Utils {
 
   static int weekstamp(DateTime date) {
     DateTime weekDate = date.subtract(Duration(days: date.weekday % 7));
-    return (weekDate.difference(weekStart).inDays / 7).truncate();
+    return (weekDate.difference(start).inDays / 7).truncate();
   }
 
   static DateTime weekdate(int weekstamp) {
-    return weekStart.add(Duration(days: weekstamp * 7));
+    return start.add(Duration(days: weekstamp * 7));
+  }
+
+  static int daystamp(DateTime date) {
+    return date.difference(start).inDays;
+  }
+
+  static DateTime daydate(int daystamp) {
+    return start.add(Duration(days: daystamp));
   }
 
   static void logActivity(String activity, int duration, int timestamp) {

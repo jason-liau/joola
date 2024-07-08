@@ -22,11 +22,11 @@ class _MyWidgetState extends State<OverviewPage> {
   final Stream<DocumentSnapshot> usersStream = FirebaseFirestore.instance.collection('Users').doc(FirebaseAuth.instance.currentUser!.uid).snapshots();
 
   void editProfilePicture() {
-    print('test');
+    print('editted profile');
   }
 
   void checkIn() {
-    print('test');
+    print('checked in');
   }
 
   @override
@@ -67,7 +67,7 @@ class _MyWidgetState extends State<OverviewPage> {
                                           0.18), // this needs to be double the avatar radius
                                       height: Utils.percentWidth(context, 0.18)),
                                   CircleAvatar(
-                                      radius: Utils.percentWidth(context, 0.1)),
+                                      radius: Utils.percentWidth(context, 0.12)),
                                   Container(
                                       width: Utils.percentWidth(context, 0.07),
                                       height: Utils.percentWidth(context, 0.07),
@@ -92,6 +92,14 @@ class _MyWidgetState extends State<OverviewPage> {
                                     style: const TextStyle(
                                         fontSize: 20, fontWeight: FontWeight.bold))
                               ])),
+                              SizedBox(
+                                  height: Utils.percentHeight(context, padding)),
+                              const Text('Stats',
+                                textAlign: TextAlign.left,
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 25,
+                                    fontWeight: FontWeight.bold)),
                               SizedBox(
                                   height: Utils.percentHeight(context, padding)),
                               const Stats(),
