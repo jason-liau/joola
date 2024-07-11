@@ -141,6 +141,7 @@ class _CalendarPageState extends State<CalendarPage> {
                   children: [
                     Center(
                         child: Container(
+                          height: Utils.percentWidth(context, 1.1),
                       decoration: BoxDecoration(
                           border: Border.all(color: Colors.black12, width: 1.0),
                           borderRadius: BorderRadius.circular(12)),
