@@ -9,6 +9,7 @@ Map<String, bool> activeDays = {}; // y-m-d -> isActive
 Map<String, int> monthlyDaysActive = {}; // y-m -> daysActive
 Map<String, int> longestStreak = {}; // y-m -> streak
 int streak = 0;
+String uuidCache = '';
 
 class CalendarPage extends StatefulWidget {
   final Function(BuildContext, DateTime)? action;
@@ -27,6 +28,7 @@ class CalendarPage extends StatefulWidget {
 }
 
 class _CalendarPageState extends State<CalendarPage> {
+  final String uuid = FirebaseAuth.instance.currentUser!.uid;
   final Stream<DocumentSnapshot> activityStream = FirebaseFirestore.instance.collection('Activities').doc(FirebaseAuth.instance.currentUser!.uid).snapshots();
   late PageController _pageController;
   DateTime current = DateTime.now();
@@ -101,6 +103,13 @@ class _CalendarPageState extends State<CalendarPage> {
 
   @override
   Widget build(BuildContext context) {
+    if (uuidCache != uuid) {
+      activeDays = {};
+      monthlyDaysActive = {};
+      longestStreak = {};
+      streak = 0;
+      uuidCache = uuid;
+    }
     return StreamBuilder<DocumentSnapshot>(
       stream: activityStream,
       builder: (context, snapshot) {

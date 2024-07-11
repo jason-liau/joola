@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:joola/src/utils/utils.dart';
 
 int mood = 0;
+String uuidCache = '';
 
 class MoodCheckIn extends StatefulWidget {
   const MoodCheckIn({super.key});
@@ -13,6 +14,7 @@ class MoodCheckIn extends StatefulWidget {
 }
 
 class _MoodCheckInState extends State<MoodCheckIn> {
+  final String uuid = FirebaseAuth.instance.currentUser!.uid;
   final Stream<DocumentSnapshot> moodStream = FirebaseFirestore.instance.collection('Moods').doc(FirebaseAuth.instance.currentUser!.uid).collection('Day').doc(Utils.daystamp(DateTime.now()).toString()).snapshots();
 
   // 1 - awful, 2 - bad, 3 - neutral, 4 - good, 5 - great
@@ -25,6 +27,11 @@ class _MoodCheckInState extends State<MoodCheckIn> {
 
   @override
   Widget build(BuildContext context) {
+    if (uuidCache != uuid) {
+      mood = 0;
+      uuidCache = uuid;
+    }
+
     return StreamBuilder<DocumentSnapshot>(
       stream: moodStream,
       builder: (context, snapshot) {

@@ -8,6 +8,7 @@ import 'package:joola/src/components/start_activity.dart';
 import 'package:joola/src/utils/utils.dart';
 
 String firstName = '';
+String uuidCache = '';
 
 class HomePage extends StatefulWidget {
   const HomePage({
@@ -23,10 +24,10 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    print((MediaQuery.of(context).viewPadding.top + 10 + Utils.percentWidth(context, 0.18)) / MediaQuery.sizeOf(context).height);
-    print(MediaQuery.sizeOf(context).height);
-    print(MediaQuery.sizeOf(context).width + Utils.percentWidth(context, 0.18) + MediaQuery.of(context).viewPadding.top);
-    print(1 - (MediaQuery.sizeOf(context).width + Utils.percentWidth(context, 0.18) + MediaQuery.of(context).viewPadding.top) / MediaQuery.sizeOf(context).height);
+    if (uuidCache != uuid) {
+      firstName = '';
+      uuidCache = uuid;
+    }
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 64, 64, 162),
       body: StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(

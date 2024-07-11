@@ -6,6 +6,7 @@ import '../components/stats.dart';
 import '../utils/utils.dart';
 
 String name = '';
+String uuidCache = '';
 
 class OverviewPage extends StatefulWidget {
   static var padding = 0.02;
@@ -19,6 +20,7 @@ class OverviewPage extends StatefulWidget {
 class _MyWidgetState extends State<OverviewPage> {
   static var padding = OverviewPage.padding;
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
+  final String uuid = FirebaseAuth.instance.currentUser!.uid;
   final Stream<DocumentSnapshot> usersStream = FirebaseFirestore.instance.collection('Users').doc(FirebaseAuth.instance.currentUser!.uid).snapshots();
 
   void editProfilePicture() {
@@ -31,6 +33,10 @@ class _MyWidgetState extends State<OverviewPage> {
 
   @override
   Widget build(BuildContext context) {
+    if (uuidCache != uuid) {
+      name = '';
+      uuidCache = uuid;
+    }
     return StreamBuilder<DocumentSnapshot>(
       stream: usersStream,
       builder: (context, snapshot) {

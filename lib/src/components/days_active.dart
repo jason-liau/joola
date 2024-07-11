@@ -9,6 +9,7 @@ int duration = 0;
 int prevDuration = 0;
 int prevPrevDuration = 0;
 Map<String, bool> daysActive = {};
+String uuidCache = '';
 
 class DaysActive extends StatefulWidget {
   const DaysActive({
@@ -43,6 +44,14 @@ class _DaysActiveState extends State<DaysActive> {
 
   @override
   Widget build(BuildContext context) {
+    if (uuid != uuidCache) {
+      duration = 0;
+      prevDuration = 0;
+      prevPrevDuration = 0;
+      daysActive = {};
+      uuidCache = uuid;
+    }
+
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
