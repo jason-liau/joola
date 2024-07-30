@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:joola/src/components/days_active.dart';
 import 'package:joola/src/components/home_header.dart';
 import 'package:joola/src/components/log_activity.dart';
+import 'package:joola/src/components/progress_bar.dart';
 import 'package:joola/src/components/start_activity.dart';
 import 'package:joola/src/utils/utils.dart';
 
@@ -128,6 +129,10 @@ class _HomePageState extends State<HomePage> {
                     ),
                   );
                 })
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: MediaQuery.of(context).viewPadding.top + 10 + Utils.percentWidth(context, 0.2)),
+                child: const ProgressBar(),
               ),
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 30, vertical: MediaQuery.of(context).viewPadding.top + 10 + Utils.percentWidth(context, 0.21)),

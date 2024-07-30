@@ -25,9 +25,6 @@ class _DaysActiveState extends State<DaysActive> {
 
   String durationString(int duration) {
     duration = duration.abs();
-    if (duration / Duration.secondsPerHour >= 1) {
-      return '${formatDouble(duration / Duration.secondsPerHour)} hrs';
-    }
     if (duration / Duration.secondsPerMinute >= 1) {
       return '${formatDouble(duration / Duration.secondsPerMinute)} mins';
     }
@@ -36,10 +33,7 @@ class _DaysActiveState extends State<DaysActive> {
 
   String formatDouble(double d) {
     String formatted = d.toStringAsFixed(1);
-    if (formatted.substring(formatted.length - 1) == '0') {
-      return formatted.substring(0, formatted.length - 2);
-    }
-    return formatted;
+    return formatted.substring(0, formatted.length - 2);
   }
 
   @override
