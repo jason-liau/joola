@@ -23,7 +23,7 @@ class LogActivity extends StatelessWidget {
             try {
               final String activity = controllers.first.text;
               final int duration = int.parse(controllers.last.text);
-              Utils.logActivity(activity, (duration / 60).floor(), timestamp);
+              Utils.logActivity(activity, duration * 60, timestamp);
               Navigator.pop(context);
               Utils.showErrorMessage(context, 'Logged activity');
             } catch (e) {
