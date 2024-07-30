@@ -31,7 +31,7 @@ class _DaysActiveState extends State<DaysActive> {
     if (duration / Duration.secondsPerMinute >= 1) {
       return '${formatDouble(duration / Duration.secondsPerMinute)} mins';
     }
-    return '${formatDouble(duration.toDouble())} secs';
+    return '0 mins';
   }
 
   String formatDouble(double d) {

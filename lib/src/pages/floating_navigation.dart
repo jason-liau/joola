@@ -76,6 +76,7 @@ class _FloatingNavigationPageState extends State<FloatingNavigationPage>
       showIcon: false,
       offset: Utils.percentHeight(context, 0.03),
       child: TabBar(
+          isScrollable: false,
           overlayColor: WidgetStateProperty.all(Colors.transparent),
           controller: tabController,
           labelColor: Colors.white,

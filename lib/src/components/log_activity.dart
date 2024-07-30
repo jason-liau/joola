@@ -16,14 +16,14 @@ class LogActivity extends StatelessWidget {
       builder: (BuildContext context) {
         return SettingsPopup(
           title: 'Log Activity',
-          texts: const ['Activity', 'Duration'],
+          texts: const ['Activity', 'Duration (Minutes)'],
           obscures: const [false, false],
           keyboardTypes: const [TextInputType.text, TextInputType.number],
           action: (BuildContext context, List<TextEditingController> controllers) {
             try {
               final String activity = controllers.first.text;
               final int duration = int.parse(controllers.last.text);
-              Utils.logActivity(activity, duration, timestamp);
+              Utils.logActivity(activity, (duration / 60).floor(), timestamp);
               Navigator.pop(context);
               Utils.showErrorMessage(context, 'Logged activity');
             } catch (e) {
