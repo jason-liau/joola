@@ -1,4 +1,4 @@
-# Pilot
+# Joola Healthcare App
 
 A new Flutter project.
 
