@@ -26,6 +26,7 @@ class Utils {
 
   static int weekstamp(DateTime date) {
     DateTime weekDate = date.subtract(Duration(days: date.weekday % 7));
+    weekDate = DateTime(weekDate.year, weekDate.month, weekDate.day);
     return (weekDate.difference(start).inDays / 7).truncate();
   }
 
