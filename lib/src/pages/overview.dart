@@ -73,6 +73,7 @@ class _MyWidgetState extends State<OverviewPage> {
                                           0.18), // this needs to be double the avatar radius
                                       height: Utils.percentWidth(context, 0.18)),
                                   CircleAvatar(
+                                    foregroundImage: const AssetImage('assets/images/jane_scott.jpg'),
                                       radius: Utils.percentWidth(context, 0.12)),
                                   Container(
                                       width: Utils.percentWidth(context, 0.07),

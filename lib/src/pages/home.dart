@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:joola/src/components/card_view.dart';
 import 'package:joola/src/components/days_active.dart';
 import 'package:joola/src/components/home_header.dart';
+import 'package:joola/src/components/horizontal_scroll.dart';
 import 'package:joola/src/components/log_activity.dart';
 import 'package:joola/src/components/progress_bar.dart';
 import 'package:joola/src/components/start_activity.dart';
@@ -47,6 +49,10 @@ class _HomePageState extends State<HomePage> {
                 widthFactor: 1,
                 child: Container(
                   decoration: const BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage('assets/images/home_background.png'),
+                      fit: BoxFit.cover
+                    ),
                     gradient: LinearGradient(
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
@@ -58,47 +64,6 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 )
-              ),
-              Positioned(
-                top: -Utils.percentWidth(context, 0.1),
-                left: -Utils.percentWidth(context, 0.45),
-                child: Container(
-                  width: Utils.percentWidth(context, 1.12),
-                  height: Utils.percentWidth(context, 1.12),
-                  decoration: const BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                        Color.fromARGB(255, 80, 78, 171),
-                        Color.fromARGB(255, 107, 97, 189),
-                        Color.fromARGB(255, 138, 120, 208),
-                      ],
-                      tileMode: TileMode.clamp,
-                    ),
-                    shape: BoxShape.circle
-                  )
-                ),
-              ),
-              Positioned(
-                top: -Utils.percentWidth(context, 0.035),
-                left: -Utils.percentWidth(context, 0.515),
-                child: Container(
-                  width: Utils.percentWidth(context, 1.12),
-                  height: Utils.percentWidth(context, 1.12),
-                  decoration: const BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                        Color.fromARGB(255, 97, 93, 180),
-                        Color.fromARGB(255, 162, 141, 222),
-                      ],
-                      tileMode: TileMode.clamp,
-                    ),
-                    shape: BoxShape.circle
-                  )
-                ),
               ),
               Padding(
                 padding: EdgeInsets.symmetric(
@@ -159,39 +124,92 @@ class _HomePageState extends State<HomePage> {
                         parent: BouncingScrollPhysics()
                       ),
                       controller: scrollController,
-                      child: const Column(
+                      child: Column(
                         children: [
                           // HomeHeader(
                           //   text: 'In Progress'
                           // ),
                           // HorizontalScroll(),
-                          HomeHeader(
+                          const HomeHeader(
                             text: 'Activity'
                           ),
-                          Row(
+                          const Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               StartActivity(),
                               LogActivity()
                             ]
                           ),
-                          // HomeHeader(
-                          //   text: 'Recommended for You'
-                          // ),
-                          // HorizontalScroll(),
+                          const HomeHeader(
+                            text: 'Recommended for You'
+                          ),
+                          const Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 30),
+                            child: HorizontalScroll(
+                              widgets: <Widget>[
+                                CardView(
+                                  image: 'assets/images/ronald_richards.jpg',
+                                  title: 'Breath Awareness Techniques',
+                                  name: 'Ronald Richards',
+                                  widthPercent: 0.7,
+                                ),
+                                SizedBox(width: 30),
+                                CardView(
+                                  image: 'assets/images/devon_lane.jpg',
+                                  title: 'Changing Spin on Serve',
+                                  name: 'Devon Lane',
+                                  widthPercent: 0.7,
+                                ),
+                                SizedBox(width: 30),
+                                CardView(
+                                  image: 'assets/images/jenny_wilson.jpg',
+                                  title: 'Inner Calm Stretches',
+                                  name: 'Jenny Wilson',
+                                  widthPercent: 0.7,
+                                )
+                              ]
+                            ),
+                          ),
                           // HomeHeader(
                           //   text: 'Train'
                           // ),
                           // HorizontalScroll(),
-                          // HomeHeader(
-                          //   text: 'Trending Categories'
-                          // ),
-                          // HorizontalScroll(),
+                          const HomeHeader(
+                            text: 'Trending Categories'
+                          ),
+                          const Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 30),
+                            child: HorizontalScroll(
+                              widgets: <Widget>[
+                                CardView(
+                                  image: 'assets/images/robert_fox.png',
+                                  title: 'Paddle Play Warmup',
+                                  name: 'Robert Fox',
+                                  widthPercent: 0.7,
+                                ),
+                                SizedBox(width: 30),
+                                CardView(
+                                  image: 'assets/images/brian_howard.jpg',
+                                  title: 'Tranquil Touch Session',
+                                  name: 'Brian Howard',
+                                  widthPercent: 0.7,
+                                ),
+                                SizedBox(width: 30),
+                                CardView(
+                                  image: 'assets/images/albert_flores.png',
+                                  title: 'Stretch & Strengthen Session',
+                                  name: 'Albert Flores',
+                                  widthPercent: 0.7,
+                                )
+                              ]
+                            ),
+                          ),
                           // HomeHeader(
                           //   text: 'Upcoming Events'
                           // ),
                           // HorizontalScroll(),
-                          Padding(padding: EdgeInsets.only(bottom: 30))
+                          SizedBox(height: Utils.percentWidth(context, 0.2)),
+                          const Padding(padding: EdgeInsets.only(bottom: 30))
                         ]
                       )
                     )

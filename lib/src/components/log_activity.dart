@@ -40,7 +40,7 @@ class LogActivity extends StatelessWidget {
     return HomeButton(
       text: 'Log Activity',
       icon: Icons.add_circle_outline,
-      color: const Color.fromARGB(255, 218, 115, 171),
+      image: 'assets/images/log_activity.png',
       onTap: () {
         Navigator.push(
           context,

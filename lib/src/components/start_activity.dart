@@ -14,7 +14,7 @@ class StartActivity extends StatelessWidget {
     return HomeButton(
       text: 'Start Activity',
       icon: Icons.directions_run,
-      color: const Color.fromARGB(255, 108, 108, 193),
+      image: 'assets/images/start_activity.png',
       onTap: () {
         showModalBottomSheet(
           context: context,

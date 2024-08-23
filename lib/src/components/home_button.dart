@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:joola/src/utils/utils.dart';
 
 class HomeButton extends StatelessWidget {
   final String text;
   final IconData icon;
-  final Color color;
+  final String image;
   final Function()? onTap;
 
   const HomeButton({
     super.key,
     required this.text,
     required this.icon,
-    required this.color,
+    required this.image,
     required this.onTap
   });
 
@@ -25,7 +26,10 @@ class HomeButton extends StatelessWidget {
           height: Utils.percentWidth(context, 0.25),
           width: Utils.percentWidth(context, 0.4),
           decoration: BoxDecoration(
-            color: color,
+            image: DecorationImage(
+              image: AssetImage(image),
+              fit: BoxFit.cover,
+            ),
             borderRadius: BorderRadius.circular(20)
           ),
           child: Column(
