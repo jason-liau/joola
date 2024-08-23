@@ -13,7 +13,7 @@ class HomeHeader extends StatelessWidget {
     return Container(
       alignment: Alignment.topLeft,
       child: Padding(
-        padding: const EdgeInsets.all(30),
+        padding: const EdgeInsets.symmetric(horizontal: 30),
         child: Text(
           text,
           style: const TextStyle(

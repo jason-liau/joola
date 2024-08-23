@@ -5,9 +5,6 @@ import '../components/mood_checkin.dart';
 import '../components/stats.dart';
 import '../utils/utils.dart';
 
-String name = '';
-String uuidCache = '';
-
 class OverviewPage extends StatefulWidget {
   static var padding = 0.02;
   // The padding for all elements on this page can be adjusted here (percentage).
@@ -17,7 +14,9 @@ class OverviewPage extends StatefulWidget {
   State<OverviewPage> createState() => _MyWidgetState();
 }
 
-class _MyWidgetState extends State<OverviewPage> {
+class _MyWidgetState extends State<OverviewPage> with AutomaticKeepAliveClientMixin  {
+  String name = '';
+  String uuidCache = '';
   static var padding = OverviewPage.padding;
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
   final String uuid = FirebaseAuth.instance.currentUser!.uid;
@@ -139,4 +138,7 @@ class _MyWidgetState extends State<OverviewPage> {
       }
     );
   }
+  
+  @override
+  bool get wantKeepAlive => true;
 }

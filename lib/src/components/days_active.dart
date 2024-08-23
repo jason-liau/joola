@@ -5,11 +5,6 @@ import 'package:joola/src/components/day_circle.dart';
 import 'package:joola/src/utils/utils.dart';
 
 const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-int duration = 0;
-int prevDuration = 0;
-int prevPrevDuration = 0;
-Map<String, bool> daysActive = {};
-String uuidCache = '';
 
 class DaysActive extends StatefulWidget {
   const DaysActive({
@@ -20,8 +15,13 @@ class DaysActive extends StatefulWidget {
   State<DaysActive> createState() => _DaysActiveState();
 }
 
-class _DaysActiveState extends State<DaysActive> {
+class _DaysActiveState extends State<DaysActive> with AutomaticKeepAliveClientMixin {
   final String uuid = FirebaseAuth.instance.currentUser!.uid;
+  int duration = 0;
+  int prevDuration = 0;
+  int prevPrevDuration = 0;
+  Map<String, bool> daysActive = {};
+  String uuidCache = '';
 
   String durationString(int duration) {
     duration = duration.abs();
@@ -177,4 +177,7 @@ class _DaysActiveState extends State<DaysActive> {
       )
     );
   }
+  
+  @override
+  bool get wantKeepAlive => true;
 }

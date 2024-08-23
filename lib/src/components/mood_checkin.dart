@@ -3,9 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:joola/src/utils/utils.dart';
 
-int mood = 0;
-String uuidCache = '';
-
 class MoodCheckIn extends StatefulWidget {
   const MoodCheckIn({super.key});
 
@@ -13,7 +10,9 @@ class MoodCheckIn extends StatefulWidget {
   State<MoodCheckIn> createState() => _MoodCheckInState();
 }
 
-class _MoodCheckInState extends State<MoodCheckIn> {
+class _MoodCheckInState extends State<MoodCheckIn> with AutomaticKeepAliveClientMixin {
+  int mood = 0;
+  String uuidCache = '';
   final String uuid = FirebaseAuth.instance.currentUser!.uid;
   final Stream<DocumentSnapshot> moodStream = FirebaseFirestore.instance.collection('Moods').doc(FirebaseAuth.instance.currentUser!.uid).collection('Day').doc(Utils.daystamp(DateTime.now()).toString()).snapshots();
 
@@ -140,4 +139,7 @@ class _MoodCheckInState extends State<MoodCheckIn> {
       }
     );
   }
+  
+  @override
+  bool get wantKeepAlive => true;
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:joola/src/components/card_view.dart';
+import 'package:joola/src/components/page_title.dart';
 import 'package:joola/src/utils/utils.dart';
 
 class WellnessPage extends StatelessWidget {
@@ -16,11 +17,16 @@ class WellnessPage extends StatelessWidget {
           physics: const BouncingScrollPhysics(),
           scrollDirection: Axis.vertical,
           children: [
+            const PageTitle(text: 'Wellness'),
+            const SizedBox(height: 30),
             const CardView(
               image: 'assets/images/wade_warren.png',
               title: 'Walk More - Live Longer!',
               name: 'Wade Warren',
               widthPercent: 1,
+              rating: '4.5',
+              icon: Icons.watch_later_rounded,
+              text: '30 min'
             ),
             const SizedBox(height: 30),
             const CardView(
@@ -28,6 +34,9 @@ class WellnessPage extends StatelessWidget {
               title: '9 Key Nutrients as We Age',
               name: 'Kathryn Murphy',
               widthPercent: 1,
+              rating: '4.1',
+              icon: Icons.watch_later_rounded,
+              text: '25 min'
             ),
             const SizedBox(height: 30),
             const CardView(
@@ -35,6 +44,9 @@ class WellnessPage extends StatelessWidget {
               title: 'Healthy Sleep Tips',
               name: 'Theresa Webb',
               widthPercent: 1,
+              rating: '4.5',
+              icon: Icons.watch_later_rounded,
+              text: '10 min'
             ),
             const SizedBox(height: 30),
             const CardView(
@@ -42,6 +54,9 @@ class WellnessPage extends StatelessWidget {
               title: 'Don\'t Let Allergies Slow You Down',
               name: 'Dianne Russell',
               widthPercent: 1,
+              rating: '4.5',
+              icon: Icons.watch_later_rounded,
+              text: '25 min'
             ),
             SizedBox(
               height: Utils.percentHeight(context, 0.1),

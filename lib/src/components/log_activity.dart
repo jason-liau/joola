@@ -9,32 +9,6 @@ class LogActivity extends StatelessWidget {
     super.key,
   });
 
-  void log(BuildContext context, DateTime date) {
-    int timestamp = DateTime.utc(date.year, date.month, date.day, 12).millisecondsSinceEpoch;
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return SettingsPopup(
-          title: 'Log Activity',
-          texts: const ['Activity', 'Duration (Minutes)'],
-          obscures: const [false, false],
-          keyboardTypes: const [TextInputType.text, TextInputType.number],
-          action: (BuildContext context, List<TextEditingController> controllers) {
-            try {
-              final String activity = controllers.first.text;
-              final int duration = int.parse(controllers.last.text);
-              Utils.logActivity(activity, duration * 60, timestamp);
-              Navigator.pop(context);
-              Utils.showErrorMessage(context, 'Logged activity');
-            } catch (e) {
-              Utils.showErrorMessage(context, e.toString());
-            }
-          }
-        );
-      }
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return HomeButton(
@@ -49,7 +23,7 @@ class LogActivity extends StatelessWidget {
               backgroundColor: Colors.white,
               body: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [CalendarPage(action: log),
+                children: [const CalendarPage(),
                   TextButton(
                     child: Container(
                       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),

@@ -10,9 +10,6 @@ import 'package:joola/src/components/progress_bar.dart';
 import 'package:joola/src/components/start_activity.dart';
 import 'package:joola/src/utils/utils.dart';
 
-String firstName = '';
-String uuidCache = '';
-
 class HomePage extends StatefulWidget {
   const HomePage({
     super.key,
@@ -22,11 +19,17 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin {
   final String uuid = FirebaseAuth.instance.currentUser!.uid;
+  String firstName = '';
+  String uuidCache = '';
+
+  @override
+  bool get wantKeepAlive => true;
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     if (uuidCache != uuid) {
       firstName = '';
       uuidCache = uuid;
@@ -130,9 +133,11 @@ class _HomePageState extends State<HomePage> {
                           //   text: 'In Progress'
                           // ),
                           // HorizontalScroll(),
+                          const SizedBox(height: 30),
                           const HomeHeader(
                             text: 'Activity'
                           ),
+                          const SizedBox(height: 20),
                           const Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -140,9 +145,11 @@ class _HomePageState extends State<HomePage> {
                               LogActivity()
                             ]
                           ),
+                          const SizedBox(height: 30),
                           const HomeHeader(
                             text: 'Recommended for You'
                           ),
+                          const SizedBox(height: 30),
                           const Padding(
                             padding: EdgeInsets.symmetric(horizontal: 30),
                             child: HorizontalScroll(
@@ -152,6 +159,9 @@ class _HomePageState extends State<HomePage> {
                                   title: 'Breath Awareness Techniques',
                                   name: 'Ronald Richards',
                                   widthPercent: 0.7,
+                                  rating: '4.5',
+                                  icon: Icons.menu_book_outlined,
+                                  text: '30 Classes'
                                 ),
                                 SizedBox(width: 30),
                                 CardView(
@@ -159,6 +169,9 @@ class _HomePageState extends State<HomePage> {
                                   title: 'Changing Spin on Serve',
                                   name: 'Devon Lane',
                                   widthPercent: 0.7,
+                                  rating: '4.5',
+                                  icon: Icons.watch_later_rounded,
+                                  text: '30 min'
                                 ),
                                 SizedBox(width: 30),
                                 CardView(
@@ -166,6 +179,9 @@ class _HomePageState extends State<HomePage> {
                                   title: 'Inner Calm Stretches',
                                   name: 'Jenny Wilson',
                                   widthPercent: 0.7,
+                                  rating: '4.1',
+                                  icon: Icons.watch_later_rounded,
+                                  text: '12 Classes'
                                 )
                               ]
                             ),
@@ -174,9 +190,12 @@ class _HomePageState extends State<HomePage> {
                           //   text: 'Train'
                           // ),
                           // HorizontalScroll(),
+
+                          const SizedBox(height: 30),
                           const HomeHeader(
                             text: 'Trending Categories'
                           ),
+                          const SizedBox(height: 30),
                           const Padding(
                             padding: EdgeInsets.symmetric(horizontal: 30),
                             child: HorizontalScroll(
@@ -186,6 +205,9 @@ class _HomePageState extends State<HomePage> {
                                   title: 'Paddle Play Warmup',
                                   name: 'Robert Fox',
                                   widthPercent: 0.7,
+                                  rating: '4.5',
+                                  icon: Icons.watch_later_rounded,
+                                  text: '30 min'
                                 ),
                                 SizedBox(width: 30),
                                 CardView(
@@ -193,6 +215,9 @@ class _HomePageState extends State<HomePage> {
                                   title: 'Tranquil Touch Session',
                                   name: 'Brian Howard',
                                   widthPercent: 0.7,
+                                  rating: '4.3',
+                                  icon: Icons.watch_later_rounded,
+                                  text: '45 min'
                                 ),
                                 SizedBox(width: 30),
                                 CardView(
@@ -200,6 +225,9 @@ class _HomePageState extends State<HomePage> {
                                   title: 'Stretch & Strengthen Session',
                                   name: 'Albert Flores',
                                   widthPercent: 0.7,
+                                  rating: '4.5',
+                                  icon: Icons.watch_later_rounded,
+                                  text: '25 min'
                                 )
                               ]
                             ),

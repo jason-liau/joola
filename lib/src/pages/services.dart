@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:joola/src/components/page_title.dart';
 
 class ServicesPage extends StatelessWidget {
   const ServicesPage({
@@ -7,7 +8,20 @@ class ServicesPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
+      body: Padding(
+        padding: const EdgeInsets.all(30),
+        child: ListView(
+          physics: const BouncingScrollPhysics(),
+          scrollDirection: Axis.vertical,
+          children: const [
+            PageTitle(
+              text: 'Services',
+            ),
+            SizedBox(height: 30),
+          ]
+        ),
+      )
     );
   }
 }

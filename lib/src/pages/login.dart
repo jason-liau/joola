@@ -5,7 +5,6 @@ import 'package:joola/src/components/login_text.dart';
 import 'package:joola/src/components/square_tile.dart';
 import 'package:joola/src/utils/utils.dart';
 
-
 class LoginPage extends StatefulWidget {
   final Function()? onTap;
   const LoginPage({

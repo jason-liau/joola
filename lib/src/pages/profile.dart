@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:joola/src/pages/history.dart';
 import 'package:joola/src/pages/settings.dart';
+import 'package:joola/src/utils/utils.dart';
 import 'overview.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -114,21 +115,21 @@ class _MyWidgetState extends State<ToggleBar> {
           children: <Widget>[
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 35),
-              child: const Text(
+              child: Text(
                 'Overview',
                 style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w400,
+                    fontSize: Utils.percentWidth(context, 0.04),
+                    fontWeight: FontWeight.w500,
                     fontFamily: 'calibri'),
               ),
             ),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 35),
-              child: const Text(
+              child: Text(
                 'History',
                 style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w400,
+                    fontSize: Utils.percentWidth(context, 0.04),
+                    fontWeight: FontWeight.w500,
                     fontFamily: 'calibri'),
               ),
             ),

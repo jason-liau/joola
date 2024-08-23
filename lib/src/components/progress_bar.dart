@@ -5,9 +5,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:joola/src/utils/utils.dart';
 
-int duration = 0;
-String uuidCache = '';
-
 class ProgressBar extends StatefulWidget {
   const ProgressBar({
     super.key,
@@ -17,8 +14,10 @@ class ProgressBar extends StatefulWidget {
   State<ProgressBar> createState() => _ProgressBarState();
 }
 
-class _ProgressBarState extends State<ProgressBar> {
+class _ProgressBarState extends State<ProgressBar> with AutomaticKeepAliveClientMixin{
   final String uuid = FirebaseAuth.instance.currentUser!.uid;
+  int duration = 0;
+  String uuidCache = '';
 
   String durationString(int duration) {
     duration = duration.abs();
@@ -78,4 +77,7 @@ class _ProgressBarState extends State<ProgressBar> {
       )
     );
   }
+  
+  @override
+  bool get wantKeepAlive => true;
 }

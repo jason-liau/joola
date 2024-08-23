@@ -2,23 +2,16 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:joola/src/components/settings_popup.dart';
 import 'package:table_calendar/table_calendar.dart';
 import '../utils/utils.dart';
 
-Map<String, bool> activeDays = {}; // y-m-d -> isActive
-Map<String, int> monthlyDaysActive = {}; // y-m -> daysActive
-Map<String, int> longestStreak = {}; // y-m -> streak
-int streak = 0;
-String uuidCache = '';
-
 class CalendarPage extends StatefulWidget {
-  final Function(BuildContext, DateTime)? action;
   final Duration pageAnimationDuration;
   final Curve pageAnimationCurve;
 
   const CalendarPage({
     super.key,
-    this.action,
     this.pageAnimationDuration = const Duration(milliseconds: 200),
     this.pageAnimationCurve = Curves.easeOut,
   });
@@ -27,11 +20,43 @@ class CalendarPage extends StatefulWidget {
   State<CalendarPage> createState() => _CalendarPageState();
 }
 
-class _CalendarPageState extends State<CalendarPage> {
+class _CalendarPageState extends State<CalendarPage> with AutomaticKeepAliveClientMixin  {
   final String uuid = FirebaseAuth.instance.currentUser!.uid;
   final Stream<DocumentSnapshot> activityStream = FirebaseFirestore.instance.collection('Activities').doc(FirebaseAuth.instance.currentUser!.uid).snapshots();
   late PageController _pageController;
   DateTime current = DateTime.now();
+
+  Map<String, bool> activeDays = {}; // y-m-d -> isActive
+  Map<String, int> monthlyDaysActive = {}; // y-m -> daysActive
+  Map<String, int> longestStreak = {}; // y-m -> streak
+  int streak = 0;
+  String uuidCache = '';
+
+  void log(BuildContext context, DateTime date) {
+    int timestamp = DateTime.utc(date.year, date.month, date.day, 12).millisecondsSinceEpoch;
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return SettingsPopup(
+          title: 'Log Activity',
+          texts: const ['Activity', 'Duration (Minutes)'],
+          obscures: const [false, false],
+          keyboardTypes: const [TextInputType.text, TextInputType.number],
+          action: (BuildContext context, List<TextEditingController> controllers) {
+            try {
+              final String activity = controllers.first.text;
+              final int duration = int.parse(controllers.last.text);
+              Utils.logActivity(activity, duration * 60, timestamp);
+              Navigator.pop(context);
+              Utils.showErrorMessage(context, 'Logged activity');
+            } catch (e) {
+              Utils.showErrorMessage(context, e.toString());
+            }
+          }
+        );
+      }
+    );
+  }
 
   void _onLeftChevronTap() {
     _pageController.previousPage(
@@ -272,11 +297,7 @@ class _CalendarPageState extends State<CalendarPage> {
                               return ['M', 'T', 'W', 'T', 'F', 'S', 'S'][date.weekday - 1];
                             }),
                         onDaySelected: (selectedDay, focusedDay) {
-                          if (widget.action == null) {
-                            return;
-                          }
-                    
-                          widget.action!(context, selectedDay);
+                          log(context, selectedDay);
                         },
                       ),
                     )),
@@ -294,6 +315,9 @@ class _CalendarPageState extends State<CalendarPage> {
       }
     );
   }
+  
+  @override
+  bool get wantKeepAlive => true;
 }
 
 class Chevron extends StatelessWidget {

@@ -8,6 +8,9 @@ class CardView extends StatelessWidget {
   final String title;
   final String name;
   final double widthPercent;
+  final String rating;
+  final IconData icon;
+  final String text;
   final Function()? onTap;
 
   const CardView({
@@ -16,6 +19,9 @@ class CardView extends StatelessWidget {
     required this.title,
     required this.name,
     required this.widthPercent,
+    required this.rating,
+    required this.icon,
+    required this.text,
     this.onTap,
   });
 
@@ -38,43 +44,86 @@ class CardView extends StatelessWidget {
                   fit: BoxFit.cover
                 ),
               ),
-              Positioned(
-                bottom: 0,
-                left: 0,
-                right: 0,
-                child: ClipRRect(
-                  borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(20), bottomRight: Radius.circular(20)),
-                  child: BackdropFilter(
-                    filter: ImageFilter.blur(sigmaX: 8, sigmaY: 8),
-                    blendMode: BlendMode.srcIn,
-                    child: Container(
-                      height: Utils.percentWidth(context, 0.1),
-                      color: Colors.transparent,
-                    )
-                  ),
+              ClipRRect(
+                borderRadius: const BorderRadius.all(Radius.circular(20)),
+                child: Container(
+                  height: Utils.percentWidth(context, 0.45),
+                  width: Utils.percentWidth(context, widthPercent),
+                  color: const Color.fromARGB(32, 0, 0, 0),
                 ),
               ),
               Positioned(
                 bottom: Utils.percentWidth(context, 0.019),
                 left: Utils.percentWidth(context, 0.03),
-                child: Row(
-                  children: [
-                    Text(
-                      '4.1',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                        fontSize: Utils.percentWidth(context, 0.04)
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: Utils.percentWidth(context, 0.02), vertical: Utils.percentWidth(context, 0.01)),
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(100)),
+                    color: Color.fromARGB(153, 0, 0, 0)
+                  ),
+                  child: Row(
+                    children: [
+                      Text(
+                        // '4.1',
+                        rating,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontSize: Utils.percentWidth(context, 0.035)
+                        )
+                      ),
+                      Icon(
+                        Icons.bolt_sharp,
+                        color: const Color(0xffffd600),
+                        size: Utils.percentWidth(context, 0.045)
                       )
-                    ),
-                    Icon(
-                      Icons.bolt_sharp,
-                      color: const Color(0xffffd600),
-                      size: Utils.percentWidth(context, 0.05)
-                    )
-                  ]
+                    ]
+                  ),
                 )
               ),
+              Positioned(
+                bottom: Utils.percentWidth(context, 0.019),
+                right: Utils.percentWidth(context, 0.03),
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: Utils.percentWidth(context, 0.02), vertical: Utils.percentWidth(context, 0.01)),
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(100)),
+                    color: Color.fromARGB(153, 0, 0, 0)
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Icon(
+                        // Icons.menu_book_rounded,
+                        icon,
+                        color: Colors.white,
+                        size: Utils.percentWidth(context, 0.045)
+                      ),
+                      SizedBox(
+                        width: Utils.percentWidth(context, 0.02)
+                      ),
+                      Text(
+                        // '30 Classes',
+                        text,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: Utils.percentWidth(context, 0.035),
+                          fontWeight: FontWeight.bold,
+                        )
+                      ),
+                    ],
+                  ),
+                )
+              ),
+              Positioned(
+                top: -Utils.percentWidth(context, 0.022),
+                right: Utils.percentWidth(context, 0.03),
+                child: Icon(
+                  Icons.bookmark_outline_rounded,
+                  color: Colors.white,
+                  size: Utils.percentWidth(context, 0.1),
+                )
+              )
             ]
           ),
           Padding(

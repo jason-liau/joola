@@ -67,7 +67,7 @@ class _FloatingNavigationPageState extends State<FloatingNavigationPage>
         body: BottomBar(
       body: (context, controller) => TabBarView(
         controller: tabController,
-        physics: const BouncingScrollPhysics(),
+        physics: const NeverScrollableScrollPhysics(),
         children: pages,
       ),
       borderRadius: const BorderRadius.all(Radius.circular(16)),

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:joola/src/components/card_view.dart';
+import 'package:joola/src/components/page_title.dart';
+import 'package:joola/src/components/train_tab.dart';
 import 'package:joola/src/utils/utils.dart';
 
 class TrainPage extends StatelessWidget {
@@ -16,11 +18,20 @@ class TrainPage extends StatelessWidget {
           physics: const BouncingScrollPhysics(),
           scrollDirection: Axis.vertical,
           children: [
+            const PageTitle(
+              text: 'Train',
+            ),
+            const SizedBox(height: 30),
+            TrainTab(),
+            const SizedBox(height: 30),
             const CardView(
               image: 'assets/images/dave_peter.png',
               title: 'Strategic Court Positioning',
               name: 'Dave Peter',
               widthPercent: 1,
+              rating: '4.5',
+              icon: Icons.watch_later_rounded,
+              text: '30 min'
             ),
             const SizedBox(height: 30),
             const CardView(
@@ -28,6 +39,9 @@ class TrainPage extends StatelessWidget {
               title: 'Third Shot Drop Shot',
               name: 'Darrel Steward',
               widthPercent: 1,
+              rating: '4.1',
+              icon: Icons.watch_later_rounded,
+              text: '25 min'
             ),
             const SizedBox(height: 30),
             const CardView(
@@ -35,6 +49,9 @@ class TrainPage extends StatelessWidget {
               title: 'Serve & Score Intensive',
               name: 'Leslie Alexander',
               widthPercent: 1,
+              rating: '4.5',
+              icon: Icons.watch_later_rounded,
+              text: '15 min'
             ),
             const SizedBox(height: 30),
             const CardView(
@@ -42,6 +59,9 @@ class TrainPage extends StatelessWidget {
               title: 'Rally Ready Playbook',
               name: 'Brooklyn Simmons',
               widthPercent: 1,
+              rating: '4.5',
+              icon: Icons.watch_later_rounded,
+              text: '18 min'
             ),
             const SizedBox(height: 30),
             const CardView(
@@ -49,6 +69,9 @@ class TrainPage extends StatelessWidget {
               title: 'Paddle Playbook Clinic',
               name: 'Cameron Williamson',
               widthPercent: 1,
+              rating: '4.5',
+              icon: Icons.watch_later_rounded,
+              text: '35 min'
             ),
             SizedBox(
               height: Utils.percentHeight(context, 0.1),
